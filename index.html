@@ -714,7 +714,10 @@
             for (let i = 0; i < retries; i++) {
                 try {
                     const response = await fetch(url, options);
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    if (!response.ok) {
+                        const errData = await response.json();
+                        throw new Error(`Error API (${response.status}): ${errData.error?.message || 'Ditolak oleh server'}`);
+                    }
                     return await response.json();
                 } catch (error) {
                     if (i === retries - 1) throw error;
@@ -741,7 +744,8 @@
             const typingId = showTypingIndicator();
 
             try {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                // Mengubah ke model gemini-1.5-flash yang sangat stabil untuk production
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
                 
                 // Context-aware prompt
                 const currentContext = sections[currentPage].title;
@@ -768,7 +772,8 @@
             } catch (error) {
                 console.error("Gemini API Error:", error);
                 removeElement(typingId);
-                appendMessage("Terjadi kesalahan pada jaringan. Mohon coba lagi beberapa saat.", 'error');
+                // Menampilkan detail error di layar agar mudah diperbaiki
+                appendMessage(`Terjadi kesalahan: ${error.message}. Jika error API (403), pastikan API Key benar dan Domain GitHub sudah diizinkan di Google Cloud.`, 'error');
             } finally {
                 inputField.disabled = false;
                 btnSend.disabled = false;
