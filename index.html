@@ -3,1171 +3,624 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منتدى نور العلم - منصة الاختبارات الذكية</title>
-    
-    <!-- Pustaka Inti -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>صفة حج النبي ﷺ - حديث جابر</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Firebase SDK Modular -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-      import { getFirestore, collection, addDoc, doc, setDoc, updateDoc, deleteDoc, getDocs, onSnapshot, serverTimestamp, query, where, writeBatch } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-      import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-      window.FirebaseSDK = { 
-        initializeApp, getFirestore, collection, addDoc, doc, setDoc, updateDoc, 
-        deleteDoc, getDocs, onSnapshot, serverTimestamp, query, where, writeBatch, 
-        getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken 
-      };
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        arabic: ['Amiri', 'serif'],
+                        arabicUI: ['Tajawal', 'sans-serif'],
+                        latin: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        emerald: { 50: '#ecfdf5', 100: '#d1fae5', 500: '#10b981', 600: '#059669', 800: '#065f46', 900: '#064e3b', 950: '#022c22' },
+                        amber: { 50: '#fffbeb', 100: '#fef3c7', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+                    }
+                }
+            }
+        }
     </script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * { font-family: 'Tajawal', sans-serif !important; }
-        body { background-color: #f8fafc; overflow-x: hidden; }
-        .animate-in { animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .hide-scroll::-webkit-scrollbar { display: none; }
-        select { appearance: none; }
-        
-        .gemini-loading {
-            background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6);
-            background-size: 200% 200%;
-            animation: geminiGradient 2s ease infinite;
+        body { background-color: #f8fafc; font-family: 'Tajawal', sans-serif; overflow-x: hidden; }
+        .latin-text { font-family: 'Poppins', sans-serif; direction: ltr; text-align: left; }
+        .arabic-text { 
+            font-family: 'Amiri', serif; 
+            line-height: 2.8 !important; /* Jarak spasi diperlebar agar harakat tidak tabrakan */
+            padding-top: 8px;
+            padding-bottom: 8px;
         }
-        @keyframes geminiGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        
+        /* Smooth transitions */
+        .fade-in { animation: fadeIn 0.4s ease-in-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .modal-overlay {
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-        }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }
     </style>
 </head>
-<body>
-    <div id="root"></div>
+<body class="text-slate-800 antialiased selection:bg-emerald-200 selection:text-emerald-900">
 
-    <script type="text/babel">
-        const { useState, useEffect, useMemo, useCallback } = React;
+    <!-- ========================================== -->
+    <!-- 1. HALAMAN DEPAN (LANDING PAGE)            -->
+    <!-- ========================================== -->
+    <div id="landingPage" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-700 text-white p-6 transition-opacity duration-500">
+        <!-- Dekorasi Background -->
+        <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMSI+PHBhdGggZD0iTTM2IDM0dj1sMjIgMjJ2LTRsLTIwLTIweiIvPjwvZz48L2c+PC9zdmc+')]"></div>
+        
+        <div class="relative z-10 text-center max-w-2xl mx-auto space-y-6">
+            <span class="inline-block py-1 px-4 rounded-full bg-emerald-800/50 text-emerald-100 text-sm font-semibold border border-emerald-500/30 backdrop-blur-sm latin-text tracking-wider">
+                HADITS JABIR BIN ABDULLAH RA
+            </span>
+            <h1 class="text-5xl md:text-7xl font-extrabold arabicUI leading-tight text-amber-400 drop-shadow-lg">
+                صِفَةُ حَجِّ النَّبِيِّ ﷺ
+            </h1>
+            <p class="text-xl md:text-2xl text-emerald-100 font-light latin-text">
+                Tata Cara Haji Nabi ﷺ Secara Lengkap
+            </p>
+            <div class="latin-text text-sm md:text-base text-emerald-200/80 font-light mt-4 max-w-lg mx-auto leading-relaxed">
+                "Berdasarkan riwayat Muslim, mencakup hukum-hukum haji yang paling agung. Dilengkapi dengan teks Arab asli dan terjemahan Bahasa Indonesia."
+            </div>
+            
+            <button onclick="startApp()" class="mt-12 latin-text group relative inline-flex items-center justify-center px-8 py-4 font-bold text-emerald-900 bg-amber-400 rounded-full overflow-hidden shadow-lg shadow-amber-500/30 hover:scale-105 transition-all duration-300">
+                <span class="relative z-10 flex items-center gap-2">
+                    Mulai Membaca <span class="text-xl group-hover:translate-x-1 transition-transform">→</span>
+                </span>
+            </button>
+        </div>
+    </div>
 
-        const apiKey = ""; 
-        const sdk = window.FirebaseSDK;
-        const firebaseConfig = {
-          apiKey: "AIzaSyAYF740-reiHPYvQ9L2dceWwioSPzHI4RY",
-          authDomain: "web-nurul-ilmi.firebaseapp.com",
-          projectId: "web-nurul-ilmi",
-          storageBucket: "web-nurul-ilmi.firebasestorage.app",
-          messagingSenderId: "338149861826",
-          appId: "1:338149861826:web:d633b7c5237477ed830e5b"
-        };
 
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'web-nurul-ilmi'; 
-        const firebaseApp = sdk.initializeApp(firebaseConfig);
-        const db = sdk.getFirestore(firebaseApp);
-        const auth = sdk.getAuth(firebaseApp);
+    <!-- ========================================== -->
+    <!-- 2. APLIKASI UTAMA (Materi & Sidebar)       -->
+    <!-- ========================================== -->
+    <div id="mainApp" class="hidden min-h-screen flex bg-slate-50">
+        
+        <!-- Overlay untuk Sidebar di Mobile -->
+        <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-slate-900/50 z-40 hidden transition-opacity lg:hidden"></div>
 
-        const SUBJECT_LIST = [
-            "الأدب", "العقيدة", "اللغة الإندونيسية", "اللغة الإنجليزية", 
-            "دروس اللغة العربية", "الأنشطة الإضافية", "الفقه", "الحديث", 
-            "العلوم الطبياسية", "العلوم الاجتماعية", "الخط", "الكتابة", 
-            "الرياضيات", "النحو", "التربية الوطنية", "التربية البدنية", 
-            "القراءة والكتابة", "الصرف", "السيرة النبوية", "التعبير", 
-            "التفسير", "التجويد"
+        <!-- Sidebar (Bilah Navigasi) -->
+        <aside id="sidebar" class="fixed top-0 bottom-0 right-0 w-72 bg-white shadow-2xl z-50 transform translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col latin-text border-l border-slate-100">
+            <div class="p-6 bg-emerald-900 text-white flex justify-between items-center">
+                <div>
+                    <h2 class="font-bold text-lg">Daftar Materi</h2>
+                    <p class="text-xs text-emerald-200">Sifat Haji Nabi ﷺ</p>
+                </div>
+                <button onclick="toggleSidebar()" class="lg:hidden text-white hover:text-amber-400 p-2 text-2xl">&times;</button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto py-4" id="navLinks">
+                <!-- Links akan digenerate oleh JavaScript -->
+            </div>
+        </aside>
+
+        <!-- Area Konten Utama -->
+        <main class="flex-1 lg:mr-72 flex flex-col min-h-screen relative w-full">
+            
+            <!-- Header Mobile -->
+            <header class="lg:hidden sticky top-0 z-30 bg-emerald-900 text-white p-4 shadow-md flex justify-between items-center">
+                <button onclick="toggleSidebar()" class="p-2 -mr-2 flex flex-col gap-1.5 focus:outline-none">
+                    <span class="w-6 h-0.5 bg-white rounded"></span>
+                    <span class="w-6 h-0.5 bg-white rounded"></span>
+                    <span class="w-6 h-0.5 bg-white rounded"></span>
+                </button>
+                <div class="font-bold arabicUI text-xl text-amber-400">حج النبي ﷺ</div>
+                <div class="w-8"></div> <!-- Spacer -->
+            </header>
+
+            <!-- Wadah Halaman Konten -->
+            <div id="contentContainer" class="flex-1 p-4 md:p-8 max-w-4xl mx-auto w-full pb-32">
+                <!-- Halaman 0 -->
+                <div class="page-content hidden" id="page-0">
+                    <div class="flex items-center gap-4 mb-8 latin-text justify-start flex-row-reverse border-b-2 border-emerald-100 pb-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-emerald-900">Mukadimah & Keberangkatan</h2>
+                        <span class="text-4xl bg-emerald-50 p-3 rounded-2xl shadow-inner">📜</span>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-emerald-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                وَحَدِيثُ جَابِرٍ٣ فِي حَجِّ اَلنَّبِيِّ -صلى الله عليه وسلم- يشتمل على أعظم أَحْكَامِ اَلْحَجِّ، وَهُوَ مَا رَوَاهُ مُسْلِمٌ١ عَنْ جَابِرِ بْنِ عَبْدِ اَللَّهِ رَضِيَ اَللَّهُ عَنْهُمَا،
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] leading-relaxed">
+                                <strong>Terjemahan:</strong> Dan hadits Jabir³ mengenai haji Nabi ﷺ mencakup hukum-hukum haji yang paling agung, yaitu apa yang diriwayatkan oleh Muslim¹ dari Jabir bin Abdullah radhiyallahu 'anhuma.
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-emerald-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ١- أَنَّ اَلنَّبِيَّ -صلى الله عليه وسلم- مَكَثَ فِي اَلْمَدِينَةِ تِسْعَ سِنِينَ لَمْ يَحُجَّ، ثُمَّ أَذَّنَ فِي اَلنَّاسِ فِي اَلْعَاشِرَةِ، أَنَّ رَسُولَ اَللَّهِ حَاجٌّ، فَقَدِمَ اَلْمَدِينَةَ بَشَرٌ كَثِيرٌ (كُلُّهُمْ يلتمس أن يأتم الناس بِرَسُولِ اَللَّهِ -صلى الله عليه وسلم- وَيَعْمَلُ مثله) ٢.
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] leading-relaxed">
+                                <strong>1.</strong> Bahwa Nabi ﷺ tinggal di Madinah selama sembilan tahun belum menunaikan haji. Kemudian pada tahun kesepuluh diumumkan kepada manusia bahwa Rasulullah akan berhaji. Maka datanglah manusia yang sangat banyak ke Madinah, (semuanya berharap untuk bisa bermakmum/mengikuti Rasulullah ﷺ dan beramal seperti beliau)².
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-emerald-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٢- فَخَرَجْنَا مَعَهُ حَتَّى إِذَا أَتَيْنَا: ذَا الْحُلَيْفَةِ، فَوَلَدَتْ أَسْمَاءُ بِنْتُ عُمَيْسٍ مُحَمَّدَ بْنَ أَبِي بَكْرٍ، فَأَرْسَلَتْ إِلَى رَسُولِ اَللَّهِ صلى الله عليه وسلم: كَيْفَ أَصْنَعُ؟ قَالَ: "اِغْتَسِلِي، وَاسْتَثْفِرِي٣ بثوب، وأحرمي".
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] leading-relaxed">
+                                <strong>2.</strong> Maka kami keluar bersama beliau hingga sampai di Dzul Hulaifah. Asma' binti Umais saat itu melahirkan Muhammad bin Abu Bakar, lalu ia mengutus seseorang bertanya kepada Rasulullah ﷺ: "Apa yang harus aku lakukan?" Beliau bersabda: "Mandilah, balutlah tempat keluarnya darah dengan kain, dan berihramlah."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Halaman 1 -->
+                <div class="page-content hidden" id="page-1">
+                    <div class="flex items-center gap-4 mb-8 latin-text justify-start flex-row-reverse border-b-2 border-emerald-100 pb-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-emerald-900">Ihram & Talbiyah</h2>
+                        <span class="text-4xl bg-emerald-50 p-3 rounded-2xl shadow-inner">🐪</span>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-amber-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٣- (فصلى رسول الله -صلى الله عليه وسلم- فِي اَلْمَسْجِدِ) ١، ثُمَّ رَكِبَ اَلْقَصْوَاءَ٢ حَتَّى إِذَا اِسْتَوَتْ بِهِ نَاقَتُهُ عَلَى اَلْبَيْدَاءِ٣ أهَلَّ بِالتَّوْحِيدِ: "لَبَّيْكَ٤ اَللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ اَلْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ".
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] leading-relaxed">
+                                <strong>3.</strong> (Maka Rasulullah ﷺ shalat di masjid)¹, kemudian beliau menunggang untanya Al-Qaswa² hingga ketika unta tersebut berdiri tegak membawanya di atas Al-Baida'³, beliau berihram dengan membaca kalimat tauhid: "Labbaikallahumma labbaik, labbaika laa syarika laka labbaik. Innal hamda wanni'mata laka wal mulk, laa syarika lak" (Aku penuhi panggilan-Mu ya Allah, aku penuhi panggilan-Mu. Aku penuhi panggilan-Mu, tiada sekutu bagi-Mu, aku penuhi panggilan-Mu. Sesungguhnya pujian, nikmat, dan kerajaan hanyalah milik-Mu, tiada sekutu bagi-Mu).
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-amber-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٤- وأهلَّ٥ اَلنَّاسُ بِهَذَا اَلَّذِي يُهِلُّونَ بِهِ، فَلَمْ يَرُدَّ رَسُولُ اَللَّهِ -صلى الله عليه وسلم- عَلَيْهِمْ شَيْئًا مِنْهُ،<br>
+                                ٥- وَلَزِمَ رَسُولُ اَللَّهِ -صلى الله عليه وسلم- تَلْبِيَتَهُ.<br>
+                                ٦- قَالَ جَابِرٌ: لَسْنَا نَنْوِي إِلَّا اَلْحَجَّ، لَسْنَا نَعْرِفُ اَلْعُمْرَةَ.
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>4.</strong> Dan orang-orang ber-talbiyah dengan talbiyah yang biasa mereka ucapkan, dan Rasulullah ﷺ tidak menolak sedikit pun dari bacaan mereka.</p>
+                                <p><strong>5.</strong> Dan Rasulullah ﷺ tetap melantunkan talbiyah beliau sendiri.</p>
+                                <p><strong>6.</strong> Jabir berkata: "Kami tidak berniat selain hanya untuk haji, kami saat itu tidak mengenal umrah (pada bulan-bulan haji)."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Halaman 2 -->
+                <div class="page-content hidden" id="page-2">
+                    <div class="flex items-center gap-4 mb-8 latin-text justify-start flex-row-reverse border-b-2 border-emerald-100 pb-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-emerald-900">Tawaf Baitullah & Sa'i</h2>
+                        <span class="text-4xl bg-emerald-50 p-3 rounded-2xl shadow-inner">🕋</span>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-emerald-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٧- حَتَّى إِذَا أَتَيْنَا اَلْبَيْتَ مَعَهُ اِسْتَلَمَ الركن،<br>
+                                ٨- فطاف سبعًا٦،<br>
+                                ٩- فرمل ثلاثًا١، ومشى أربعًا،
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>7.</strong> Hingga ketika kami tiba di Baitullah bersama beliau, beliau mengusap Rukun (Hajar Aswad).</p>
+                                <p><strong>8.</strong> Lalu beliau tawaf sebanyak tujuh putaran.</p>
+                                <p><strong>9.</strong> Beliau berlari-lari kecil pada tiga putaran pertama, dan berjalan biasa pada empat putaran berikutnya.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-emerald-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ١٠- ثُمَّ نَفَذَ٢ إِلَى مَقَامِ إِبْرَاهِيمَ فَقَرَأَ: {وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلّى} [اَلْبَقَرَةِ: ١٢٥] .<br>
+                                ١١- فَصَلَّى رَكْعَتَيْنِ، فَجَعَلَ اَلْمَقَامَ بَيْنَهُ وَبَيْنَ اَلْبَيْتِ.<br>
+                                ١٢- وَفِي رِوَايَةٍ: أَنَّهُ قَرَأَ فِي اَلرَّكْعَتَيْنِ: {قُلْ هُوَ اللَّهُ أَحَدٌ} {قُلْ يَا أَيُّهَا الْكَافِرُونَ} .<br>
+                                ١٣- ثُمَّ رَجَعَ إِلَى اَلرُّكْنِ وَاسْتَلَمَهُ،
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>10.</strong> Kemudian beliau menuju Maqam Ibrahim lalu membaca: "Dan jadikanlah sebagian Maqam Ibrahim tempat shalat" (QS. Al-Baqarah: 125).</p>
+                                <p><strong>11.</strong> Beliau shalat dua rakaat, menjadikan Maqam Ibrahim berada di antara beliau dan Ka'bah.</p>
+                                <p><strong>12.</strong> Dalam sebuah riwayat disebutkan: Bahwa pada dua rakaat tersebut beliau membaca Surah Al-Ikhlas (Qul huwallahu ahad) dan Surah Al-Kafirun (Qul yaa ayyuhal kaafirun).</p>
+                                <p><strong>13.</strong> Kemudian beliau kembali ke Rukun (Hajar Aswad) lalu mengusapnya kembali.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-emerald-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ١٤- ثُمَّ خَرَجَ مِنْ اَلْبَابِ إِلَى اَلصَّفَا،<br>
+                                ١٥- فَلَمَّا دَنَا مِنْ اَلصَّفَا قَرَأَ: {إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ} [اَلْبَقَرَةِ: ١٥٨] .<br>
+                                ١٦- فَرَقَى عَلَيْهِ حَتَّى رَأَى اَلْبَيْتَ،<br>
+                                ١٧- فَاسْتَقْبَلَ اَلْقِبْلَةَ،<br>
+                                ١٨- فَوَحَّدَ الله وكبره، قال: "لَا إِلَهَ إِلَّا اَللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ اَلْمُلْكُ وَلَهُ اَلْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَهَ إِلَّا اَللَّهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ اَلْأَحْزَابَ وَحْدَهُ". ثُمَّ دَعَا بَيْنَ ذَلِكَ، قَالَ مِثْلَ هذا ثلاث مرات.
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>14.</strong> Kemudian beliau keluar melalui pintu menuju bukit Safa.</p>
+                                <p><strong>15.</strong> Tatkala mendekati Safa, beliau membaca: "Sesungguhnya Safa dan Marwah adalah sebahagian dari syiar Allah" (QS. Al-Baqarah: 158).</p>
+                                <p><strong>16.</strong> Beliau menaiki bukit Safa hingga dapat melihat Ka'bah.</p>
+                                <p><strong>17.</strong> Lalu beliau menghadap ke arah Kiblat.</p>
+                                <p><strong>18.</strong> Beliau mentauhidkan Allah dan mengagungkan-Nya (bertakbir), lalu mengucapkan: "Laa ilaha illallahu wahdahu laa syarika lahu, lahul mulku wa lahul hamdu, wa huwa 'alaa kulli syai-in qadiir. Laa ilaha illallahu wahdahu, anjaza wa'dahu, wa nasara 'abdahu, wa hazamal ahzaaba wahdahu" (Tiada Tuhan berhak disembah selain Allah semata, tiada sekutu bagi-Nya, milik-Nya segala kerajaan dan pujian, Dia Maha Kuasa atas segala sesuatu. Tiada Tuhan selain Allah semata, Dia telah menepati janji-Nya, menolong hamba-Nya, dan menghancurkan golongan musuh sendirian). Beliau lalu berdoa di sela-sela itu, dan mengucapkan kalimat tersebut sebanyak tiga kali.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-emerald-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ١٩- ثم نزل ومشي إلى المروة،<br>
+                                ٢٠- حتى إذا انصبت قدماه في بطن الوادي سعى،<br>
+                                ٢١- حتى إذا صعدتا مشى،<br>
+                                ٢٢- حَتَّى أَتَى اَلْمَرْوَةَ١، فَفَعَلَ عَلَى اَلْمَرْوَةِ كَمَا فَعَلَ عَلَى اَلصَّفَا،
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>19.</strong> Kemudian beliau turun dan berjalan menuju bukit Marwah.</p>
+                                <p><strong>20.</strong> Hingga tatkala kedua kakinya menurun di perut lembah, beliau mempercepat langkahnya (sa'i / berlari kecil).</p>
+                                <p><strong>21.</strong> Hingga tatkala (kontur tanahnya) mulai menanjak, beliau kembali berjalan biasa.</p>
+                                <p><strong>22.</strong> Hingga beliau tiba di Marwah, lalu beliau melakukan di atas bukit Marwah persis seperti apa yang beliau lakukan di atas bukit Safa.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Halaman 3 -->
+                <div class="page-content hidden" id="page-3">
+                    <div class="flex items-center gap-4 mb-8 latin-text justify-start flex-row-reverse border-b-2 border-emerald-100 pb-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-emerald-900">Perintah Umrah & Kedatangan Ali</h2>
+                        <span class="text-4xl bg-emerald-50 p-3 rounded-2xl shadow-inner">👥</span>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-amber-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٢٣- حَتَّى إِذَا كَانَ آخِرُ طَوَافِهِ عَلَى اَلْمَرْوَةِ، فَقَالَ: "لَوْ أَنِّي اِسْتَقْبَلْتُ مِنْ أَمْرِي مَا اِسْتَدْبَرْتُ لَمْ أَسُقْ اَلْهَدْيَ، وَجَعَلْتُهَا عُمْرَةً، فَمَنْ كَانَ مِنْكُمْ لَيْسَ مَعَهُ هدي فليحل وليجعلها عمرة".<br>
+                                ٢٤- فَقَامَ سُرَاقَةُ بْنُ مَالِكِ بْنِ جُعْشُمٍ، فَقَالَ: يَا رَسُولَ اَللَّهِ، أَلِعَامِنَا هَذَا، أَمْ لِأَبَدٍ؟ فَشَبَّكَ رَسُولُ اَللَّهِ -صلى الله عليه وسلم- أَصَابِعَهُ وَاحِدَةً فِي اَلْأُخْرَى، وَقَالَ: "دَخَلَتْ اَلْعُمْرَةُ فِي اَلْحَجِّ -مَرَّتَيْنِ- لَا، بَلْ لِأَبَدِ أَبَدٍ".
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>23.</strong> Hingga ketika berada di putaran terakhirnya di Marwah, beliau bersabda: "Seandainya aku bisa mengulang urusanku yang telah berlalu, niscaya aku tidak akan membawa hewan kurban (hadyu) dan akan kujadikan ibadah ini sebagai umrah. Oleh karena itu, barangsiapa di antara kalian yang tidak membawa hadyu, hendaklah ia bertahalul dan menjadikannya umrah."</p>
+                                <p><strong>24.</strong> Maka Suraqah bin Malik bin Ju'syum berdiri dan bertanya: "Wahai Rasulullah, apakah (ketentuan ini) khusus untuk tahun kita ini saja, ataukah untuk selamanya?" Rasulullah ﷺ menjalin jari-jemari beliau satu sama lain sambil bersabda: "Umrah telah masuk ke dalam haji (beliau mengucapkannya dua kali). Tidak, bahkan (hukum ini berlaku) untuk selama-lamanya."</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-amber-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٢٥- وَقَدِمَ عَلِيٌّ مِنْ اَلْيَمَنِ بِبُدْنِ اَلنَّبِيِّ٢ صلى الله عليه وسلم (فَوَجَدَ فَاطِمَةَ مِمَّنْ حَلَّ، وليست ثيابًا٣ صبيغًا واكتحلت،فأنكر ذلك عليها، فقالت: إن أبي أمرني بهذا، قال: فكان علي يقول بالعراق: فذهبت إِلَى رَسُولِ اَللَّهِ -صلى الله عليه وسلم- محرشًا على فاطمة للذي صنعت، مستفتيًا لرسول الله -صلى الله عليه وسلم- فيما ذكرت عنه، فأخبرته أني أنكرت عليها، فقال: "صَدَقَتْ، صَدَقَتْ) ١، مَاذَا قُلْتَ حِينَ فَرَضْتَ اَلْحَجَّ؟ " قَالَ: قُلْتُ: اَللَّهُمَّ إِنِّي أهلُّ بِمَا أَهَلَّ بِهِ رَسُولُكَ. قَالَ: فَإِنَّ مَعِيَ اَلْهَدْيَ فَلَا تَحِلُّ.
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] leading-relaxed">
+                                <strong>25.</strong> Dan Ali datang dari Yaman membawa unta-unta kurban Nabi ﷺ (Lalu ia mendapati Fatimah termasuk orang yang telah bertahalul, ia mengenakan pakaian yang diwarnai dan memakai celak. Ali mengingkari perbuatannya itu. Fatimah berkata: "Sesungguhnya ayahku yang memerintahkan ini." Ali berkata saat di Irak: "Maka aku pergi menemui Rasulullah ﷺ untuk mengadukan Fatimah atas apa yang dilakukannya, seraya meminta fatwa membenarkan ucapan Fatimah tersebut. Aku sampaikan kepada beliau bahwa aku mengingkari perbuatan Fatimah." Nabi menjawab: "Dia benar, dia benar"). Nabi bertanya: "Apa niat yang engkau ucapkan ketika hendak berhaji?" Ali menjawab: "Aku mengucapkan: Ya Allah, aku berniat ihram dengan niat yang sama dengan Rasul-Mu." Nabi bersabda: "Sesungguhnya aku membawa hadyu, maka janganlah engkau bertahalul."
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-amber-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٢٦- قَالَ: فَكَانَ جَمَاعَةُ اَلْهَدْيِ اَلَّذِي قَدِمَ بِهِ عَلِيٌّ مِنْ اَلْيَمَنِ، وَاَلَّذِي أَتَى بِهِ اَلنَّبِيُّ -صلى الله عليه وسلم- مِائَةً.<br>
+                                ٢٧- قَالَ: فَحَلَّ اَلنَّاسُ كُلُّهُمْ، وَقَصَّرُوا، إِلَّا اَلنَّبِيَّ -صلى الله عليه وسلم- وَمَنْ كَانَ مَعَهُ هَدْيٌ.
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>26.</strong> Jabir berkata: Maka total jumlah hewan kurban (hadyu) yang dibawa Ali dari Yaman dan yang dibawa oleh Nabi ﷺ adalah 100 ekor.</p>
+                                <p><strong>27.</strong> Jabir berkata: Maka seluruh sahabat bertahalul dan memendekkan rambut mereka, kecuali Nabi ﷺ dan sahabat yang membawa hadyu bersama beliau.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Halaman 4 -->
+                <div class="page-content hidden" id="page-4">
+                    <div class="flex items-center gap-4 mb-8 latin-text justify-start flex-row-reverse border-b-2 border-emerald-100 pb-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-emerald-900">Hari Tarwiyah di Mina</h2>
+                        <span class="text-4xl bg-emerald-50 p-3 rounded-2xl shadow-inner">⛺</span>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-emerald-500">
+                        <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                            ٢٨- فَلَمَّا كَانَ يَوْمُ اَلتَّرْوِيَةِ٢ تَوَجَّهُوا إِلَى مِنًى،<br>
+                            ٢٩- فَأَهَلُّوا بِالْحَجِّ.<br>
+                            ٣٠- وَرَكِبَ اَلنَّبِيُّ -صلى الله عليه وسلم- فَصَلَّى بِهَا اَلظُّهْرَ وَالْعَصْرَ، وَالْمَغْرِبَ وَالْعِشَاءَ وَالْفَجْرَ،<br>
+                            ٣١- ثُمَّ مَكَثَ قَلِيلًا حَتَّى طَلَعَتْ اَلشَّمْسُ،
+                        </p>
+                        <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                            <p><strong>28.</strong> Tatkala tiba hari Tarwiyah (8 Dzulhijjah), mereka beranjak menuju Mina.</p>
+                            <p><strong>29.</strong> Mereka mulai berihram (kembali) untuk haji.</p>
+                            <p><strong>30.</strong> Nabi ﷺ menunggangi untanya, lalu melaksanakan shalat Dzuhur, Ashar, Maghrib, Isya, dan Subuh di sana (Mina).</p>
+                            <p><strong>31.</strong> Kemudian beliau berdiam sejenak hingga terbit matahari.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Halaman 5 -->
+                <div class="page-content hidden" id="page-5">
+                    <div class="flex items-center gap-4 mb-8 latin-text justify-start flex-row-reverse border-b-2 border-emerald-100 pb-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-emerald-900">Arafah & Khutbah Wada'</h2>
+                        <span class="text-4xl bg-emerald-50 p-3 rounded-2xl shadow-inner">🤲</span>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-amber-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٣٢- وَأَمَرَ بِقُبَّةٍ مَنْ شَعَرٍ تُضْرَبُ لَهُ بِنَمِرَةَ١، فَسَارَ رَسُولُ اَللَّهِ -صلى الله عليه وسلم- وَلَا تَشُكَّ قُرَيْشٌ إِلَّا أَنَّهُ وَاقِفٌ عِنْدَ اَلْمَشْعَرِ اَلْحَرَامِ، كَمَا كَانَتْ قُرَيْشٌ تَصْنَعُ فِي اَلْجَاهِلِيَّةِ، فَأَجَازَ٢ رَسُولُ اَللَّهِ -صلى الله عليه وسلم- حَتَّى أَتَى عَرَفَةَ، فَوَجَدَ اَلْقُبَّةَ قَدْ ضُرِبَتْ لَهُ بِنَمِرَةَ، فَنَزَلَ بِهَا،<br>
+                                ٣٣- حَتَّى إِذَا زاغت الشمس أمر بالقصواء فرحلت له،
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>32.</strong> Beliau memerintahkan agar dibuatkan tenda dari bulu untuk beliau di Namirah. Rasulullah ﷺ lalu berjalan, dan kaum Quraisy tidak ragu bahwa beliau pasti akan wuquf di Masy'aril Haram (Muzdalifah) sebagaimana kebiasaan Quraisy di masa Jahiliyah. Namun Rasulullah ﷺ terus melewatinya hingga tiba di Arafah. Beliau mendapati tenda telah didirikan untuknya di Namirah, maka beliau singgah di sana.</p>
+                                <p><strong>33.</strong> Hingga ketika matahari telah tergelincir (masuk waktu Dzuhur), beliau memerintahkan agar disiapkan unta Al-Qaswa, lalu dipasanglah pelananya.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-amber-500">
+                            <p class="arabic-text text-2xl md:text-[30px] leading-10 text-slate-800 mb-6" dir="rtl">
+                                ٣٤- فَأَتَى بَطْنَ اَلْوَادِي٣ فَخَطَبَ اَلنَّاسَ: وَقَالَ: "إِنَّ دِمَاءَكُمْ وَأَمْوَالَكُمْ حَرَامٌ عَلَيْكُمْ، كَحُرْمَةِ يَوْمِكُمْ هَذَا، فِي شَهْرِكُمْ هَذَا، فِي بَلَدِكُمْ هَذَا، أَلَا كُلُّ شَيْءٍ مِنْ أَمْرِ اَلْجَاهِلِيَّةِ تَحْتَ قَدَمَيَّ مَوْضُوعٌ، وَدِمَاءُ اَلْجَاهِلِيَّةِ مَوْضُوعَةٌ، وَإِنَّ أَوَّلَ دَمٍ أَضَعُ مِنْ دِمَائِنَا: دَمُ اِبْنِ رَبِيعَةَ بْنِ اَلْحَارِثِ -كَانَ مُسْتَرْضِعًا فِي بَنِي سَعْدٍ فَقَتَلَتْهُ هُذَيْلٌ- وَرِبَا اَلْجَاهِلِيَّةِ مَوْضُوعٌ، وَأَوَّلُ رِبًا أَضَعُ مِنْ رِبَانَا رِبَا عَبَّاسِ بْنَ عَبْدِ اَلْمُطَّلِبِ، فَإِنَّهُ مَوْضُوعٌ كُلُّهُ، فَاتَّقُوا اَللَّهَ فِي اَلنِّسَاءِ، فَإِنَّكُمْ أَخَذْتُمُوهُنَّ بِأَمَانَةِ اَللَّهِ، وَاسْتَحْلَلْتُمْ فُرُوجَهُنَّ بِكَلِمَةِ الله، ولكم عليهم ألا يوطئن فرشكم أَحَدًا تَكْرَهُونَهُ، فَإِنْ فَعَلْنَ ذَلِكَ فَاضْرِبُوهُنَّ ضَرْبًا غَيْرَ مُبَرِّحٍ، وَلَهُنَّ عَلَيْكُمْ رِزْقُهُنَّ وَكِسْوَتُهُنَّ بِالْمَعْرُوفِ. وَقَدْ تَرَكْتُ فِيكُمْ مَا لَنْ تَضِلُّوا بَعْدَهُ إِنْ اِعْتَصَمْتُمْ بِهِ، كِتَابُ اَللَّهِ. وَأَنْتُمْ تُسْأَلُونَ عَنِّي، فَمَا أَنْتُمْ قَائِلُونَ؟ " قَالُوا: نَشْهَدُ أَنَّكَ قَدْ بَلَّغْتَ، وَأَدَّيْتَ، وَنَصَحْتَ، فَقَالَ بِإِصْبُعِهِ اَلسَّبَّابَةِ يَرْفَعُهَا إِلَى اَلسَّمَاءِ وَيَنْكُبُهَا١ إِلَى اَلنَّاسِ: "اَللَّهُمَّ اشهد، اللهم اشهد"، ثلاث مرات،
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>34.</strong> Maka beliau mendatangi perut lembah (Uranah) lalu berkhutbah kepada manusia: "Sesungguhnya darah dan harta kalian haram (suci) bagi kalian, sebagaimana kesucian hari kalian ini, di bulan kalian ini, di negeri kalian ini. Ketahuilah, segala sesuatu dari perkara Jahiliyah kini berada di bawah telapak kakiku (dihapus). Darah (balas dendam) masa Jahiliyah telah dihapuskan. Dan darah pertama dari darah kita yang aku hapuskan adalah darah Ibnu Rabi'ah bin Al-Harits—ia disusukan di Bani Sa'ad lalu dibunuh oleh suku Hudzail—. Riba masa Jahiliyah telah dihapuskan, dan riba pertama dari riba kita yang aku hapuskan adalah riba Abbas bin Abdul Muthalib, sesungguhnya semuanya telah dihapus total. Bertakwalah kepada Allah dalam urusan wanita, karena kalian telah mengambil mereka dengan amanat Allah dan menghalalkan kemaluan mereka dengan kalimat Allah. Hak kalian atas mereka adalah mereka tidak boleh mengizinkan orang yang kalian benci menginjak alas tidur (masuk ke rumah) kalian. Jika mereka melakukannya, pukullah mereka dengan pukulan yang tidak melukai. Dan kewajiban kalian adalah memberi rezeki (nafkah) dan pakaian mereka dengan cara yang ma'ruf. Dan sungguh aku telah meninggalkan di tengah kalian sesuatu yang jika kalian berpegang teguh kepadanya, kalian tidak akan tersesat sesudahnya: Kitabullah (Al-Quran). Dan kalian kelak akan ditanya tentang diriku, maka apa yang akan kalian katakan?" Para sahabat menjawab: "Kami bersaksi bahwa engkau telah menyampaikan (risalah), menunaikan (amanah), dan memberi nasehat." Lalu beliau mengangkat jari telunjuknya ke arah langit lalu menunjukannya ke arah manusia seraya berkata: "Ya Allah persaksikanlah, Ya Allah persaksikanlah" sebanyak tiga kali.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-amber-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٣٥- ثُمَّ أَذَّنَ بِلَالٌ، ثُمَّ أَقَامَ فَصَلَّى اَلظُّهْرَ، ثُمَّ أَقَامَ فَصَلَّى اَلْعَصْرَ،<br>
+                                ٣٦- وَلَمْ يصلِّ بَيْنَهُمَا شَيْئًا.<br>
+                                ٣٧- ثُمَّ رَكِبَ حَتَّى أَتَى اَلْمَوْقِفَ،<br>
+                                ٣٨- فَجَعَلَ بَطْنَ نَاقَتِهِ اَلْقَصْوَاءِ إِلَى الصَّخَرَاتِ٢، وَجَعَلَ حَبْلَ المشاة٣ بين يديه، واستقبل القبلة،<br>
+                                ٣٩- فلم يزل واقفًا حتى غربت الشمس، وذهبت الصفرة قليلًا حتى غاب القرص،
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>35.</strong> Kemudian Bilal azan, lalu iqamah dan beliau shalat Dzuhur. Lalu Bilal iqamah (lagi) dan beliau shalat Ashar.</p>
+                                <p><strong>36.</strong> Dan beliau tidak mengerjakan shalat (sunnah) apapun di antara keduanya.</p>
+                                <p><strong>37.</strong> Kemudian beliau berkendara hingga tiba di tempat wuquf.</p>
+                                <p><strong>38.</strong> Beliau memposisikan perut untanya Al-Qaswa berdekatan dengan batu-batu besar, menjadikan tempat pejalan kaki di hadapannya, dan beliau menghadap kiblat.</p>
+                                <p><strong>39.</strong> Beliau terus-menerus wuquf hingga matahari terbenam, cahaya kuning sedikit memudar, dan piringan matahari tenggelam sepenuhnya.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Halaman 6 -->
+                <div class="page-content hidden" id="page-6">
+                    <div class="flex items-center gap-4 mb-8 latin-text justify-start flex-row-reverse border-b-2 border-emerald-100 pb-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-emerald-900">Mabit di Muzdalifah</h2>
+                        <span class="text-4xl bg-emerald-50 p-3 rounded-2xl shadow-inner">🌌</span>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-emerald-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٤٠- وأردف أسامة بن زيد خلفه، ودفع رسول الله -صلى الله عليه وسلم- وَقَدْ شَنَقَ لِلْقَصْوَاءِ اَلزِّمَامَ١، حَتَّى إِنَّ رَأْسَهَا يصيب مَوْرِكَ رَحْلِهِ٢،<br>
+                                ٤١- وَيَقُولُ بِيَدِهِ اَلْيُمْنَى: "أَيُّهَا اَلنَّاسُ، اَلسَّكِينَةَ، اَلسَّكِينَةَ"، كُلَّمَا أَتَى حَبْلًا٣ مِنْ اَلْحِبَالِ أَرْخَى لَهَا قَلِيلًا حَتَّى تَصْعَدَ،<br>
+                                ٤٢- حَتَّى أَتَى اَلْمُزْدَلِفَةَ،
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>40.</strong> Beliau membonceng Usamah bin Zaid di belakangnya. Lalu Rasulullah ﷺ bertolak, beliau benar-benar menarik tali kekang unta Al-Qaswa dengan kuat hingga kepala unta itu menyentuh ujung sandaran pelana.</p>
+                                <p><strong>41.</strong> Sambil memberi isyarat dengan tangan kanannya beliau berseru: "Wahai manusia, tenanglah, tenanglah." Setiap kali mendaki sebuah bukit pasir, beliau mengendurkan sedikit talinya agar unta mudah mendaki.</p>
+                                <p><strong>42.</strong> Hingga beliau tiba di Muzdalifah.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-emerald-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٤٣- فَصَلَّى بِهَا اَلْمَغْرِبَ وَالْعِشَاءَ، بِأَذَانٍ وَاحِدٍ وَإِقَامَتَيْنِ،<br>
+                                ٤٤- وَلَمْ يُسَبِّحْ بَيْنَهُمَا شَيْئًا،<br>
+                                ٤٥- ثُمَّ اِضْطَجَعَ حتى طلع الفجر٤،<br>
+                                ٤٦- وصلى الفجر حين تبين له الصبح بأذان وإقامة،
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>43.</strong> Di sana beliau melaksanakan shalat Maghrib dan Isya dengan satu azan dan dua iqamah.</p>
+                                <p><strong>44.</strong> Dan tidak mengerjakan shalat sunnah apapun di sela-selanya.</p>
+                                <p><strong>45.</strong> Kemudian beliau berbaring (tidur) hingga terbit fajar.</p>
+                                <p><strong>46.</strong> Lalu beliau shalat Subuh saat waktu pagi telah jelas bagi beliau, dengan azan dan iqamah.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Halaman 7 -->
+                <div class="page-content hidden" id="page-7">
+                    <div class="flex items-center gap-4 mb-8 latin-text justify-start flex-row-reverse border-b-2 border-emerald-100 pb-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-emerald-900">Masy'aril Haram & Lempar Jumrah</h2>
+                        <span class="text-4xl bg-emerald-50 p-3 rounded-2xl shadow-inner">🎯</span>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-amber-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٤٧- ثم ركب القصواء حتى أتى المشعر الحرام،<br>
+                                ٤٨- فاستقبل القبلة،<br>
+                                ٤٩- فدعاه، وكبرَّه، وهَلَّلَهُ، ووحده،<br>
+                                ٥٠- فلم يزل واقفًا حتى أسفر جدًّا،<br>
+                                ٥١- فدفع قبل أن تطلع الشمس،
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>47.</strong> Kemudian beliau menunggangi Al-Qaswa hingga tiba di Masy'aril Haram.</p>
+                                <p><strong>48.</strong> Beliau menghadap kiblat,</p>
+                                <p><strong>49.</strong> Lalu memanjatkan doa kepada-Nya, bertakbir, bertahlil, dan mentauhidkan-Nya.</p>
+                                <p><strong>50.</strong> Beliau terus wuquf di sana hingga langit menjadi sangat terang.</p>
+                                <p><strong>51.</strong> Lalu beliau bertolak meninggalkan tempat itu sebelum matahari terbit.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-amber-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٥٢- وَأَرْدَفَ اَلْفَضْلَ بْنَ اَلْعَبَّاسِ، حَتَّى أَتَى بَطْنَ مُحَسِّر١، فَحَرَّكَ قَلِيلًا،<br>
+                                ٥٣- ثُمَّ سَلَكَ اَلطَّرِيقَ اَلْوُسْطَى اَلَّتِي تَخْرُجُ عَلَى اَلْجَمْرَةِ اَلْكُبْرَى،<br>
+                                ٥٤- حَتَّى أَتَى اَلْجَمْرَةَ اَلَّتِي عِنْدَ اَلشَّجَرَةِ٢، فَرَمَاهَا بِسَبْعِ حَصَيَاتٍ٣،<br>
+                                ٥٥- يكبر مع كل حصاة منها، ٥٦- مثل حصى الْخَذْف،<br>
+                                ٥٧- رمى من بطن الوادي،
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>52.</strong> Beliau kali ini membonceng Al-Fadhl bin Abbas, hingga tiba di perut lembah Muhassir, beliau sedikit mempercepat laju kendaraannya.</p>
+                                <p><strong>53.</strong> Kemudian beliau menempuh jalan tengah yang tembus menuju Jumrah Kubra (Aqabah).</p>
+                                <p><strong>54.</strong> Hingga beliau tiba di Jumrah yang berada di dekat pohon, beliau melemparnya dengan tujuh butir kerikil.</p>
+                                <p><strong>55-56.</strong> Beliau bertakbir pada setiap lemparan kerikilnya. (Ukuran batunya) adalah sebesar batu khadzaf (seukuran kacang).</p>
+                                <p><strong>57.</strong> Beliau melempar dari arah perut lembah.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Halaman 8 -->
+                <div class="page-content hidden" id="page-8">
+                    <div class="flex items-center gap-4 mb-8 latin-text justify-start flex-row-reverse border-b-2 border-emerald-100 pb-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-emerald-900">Menyembelih & Tawaf Ifadah</h2>
+                        <span class="text-4xl bg-emerald-50 p-3 rounded-2xl shadow-inner">🔪</span>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-emerald-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٥٨- ثم انصرف إلى المنحر،<br>
+                                ٥٩- فنحر ثلاثًا وستين بيده،<br>
+                                ٦٠- ثم أعطى عليًّا فنحر ما غبر، وأشركه في هديه،<br>
+                                ٦١- ثم أمر من كل بُدنة بِبَضْعة، فجعلت في قدر، وطبخت، فأكلا من لحمها، وشربا من مرقها.
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>58.</strong> Kemudian beliau beranjak menuju tempat penyembelihan (Manhar).</p>
+                                <p><strong>59.</strong> Beliau menyembelih 63 ekor unta dengan tangan beliau sendiri.</p>
+                                <p><strong>60.</strong> Kemudian beliau menyerahkan kepada Ali, lalu Ali menyembelih sisanya. Beliau menyertakan Ali dalam hewan kurban tersebut.</p>
+                                <p><strong>61.</strong> Kemudian beliau memerintahkan agar diambil sepotong daging dari setiap unta, lalu dimasukkan ke dalam belanga dan dimasak. Kemudian keduanya (Nabi dan Ali) memakan sebagian dagingnya dan meminum kuahnya.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-emerald-500">
+                            <p class="arabic-text text-2xl md:text-3xl text-slate-800 mb-6" dir="rtl">
+                                ٦٢- ثم ركب رسول الله -صلى الله عليه وسلم- فَأَفَاضَ إِلَى اَلْبَيْتِ١،<br>
+                                ٦٣- فَصَلَّى بِمَكَّةَ اَلظُّهْرَ،<br>
+                                ٦٤- فَأَتَى بَنِي عَبْدِ اَلْمُطَّلِبِ، يَسْقُونَ عَلَى زَمْزَمَ، فَقَالَ: "اِنْزِعُوا بَنِي عَبْدِ اَلْمُطَّلِبِ، فَلَوْلَا أَنْ يَغْلِبَكُمْ اَلنَّاسُ عَلَى سِقَايَتِكُمْ لَنَزَعْتُ مَعَكُمْ، فَنَاوَلُوهُ دَلْوًا فَشَرِبَ مِنْهُ" رَوَاهُ مُسْلِمٌ٢.
+                            </p>
+                            <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
+                                <p><strong>62.</strong> Kemudian Rasulullah ﷺ menaiki kendaraannya lalu bertolak (Tawaf Ifadah) ke Baitullah.</p>
+                                <p><strong>63.</strong> Maka beliau melaksanakan shalat Dzuhur di Makkah.</p>
+                                <p><strong>64.</strong> Lalu beliau mendatangi Bani Abdul Muthalib yang sedang membagikan air di sumur Zamzam. Beliau bersabda: "Timbalah air wahai Bani Abdul Muthalib. Seandainya tidak karena khawatir orang-orang akan merebut tugas kalian ini, niscaya aku akan ikut menimba bersama kalian." Maka mereka memberikan beliau seember penuh, lalu beliau meminum darinya. (Diriwayatkan oleh Muslim)².</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Halaman 9 (Kesimpulan) -->
+                <div class="page-content hidden" id="page-9">
+                    <div class="flex items-center gap-4 mb-8 latin-text justify-start flex-row-reverse border-b-2 border-emerald-100 pb-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-emerald-900">Penutup & Kesimpulan</h2>
+                        <span class="text-4xl bg-emerald-50 p-3 rounded-2xl shadow-inner">📖</span>
+                    </div>
+                    <div class="bg-gradient-to-br from-emerald-800 to-emerald-900 rounded-3xl p-8 shadow-xl text-center text-emerald-50 relative overflow-hidden">
+                        <div class="absolute -right-10 -top-10 opacity-10 text-9xl">🕋</div>
+                        <div class="relative z-10">
+                            <p class="arabic-text text-3xl mb-8 text-amber-400" dir="rtl">
+                                ٢٧٣- وَكَانَ صلى الله عليه وسلم يَفْعَلُ اَلْمَنَاسِكَ، وَيَقُولُ لِلنَّاسِ: "خُذُوا عني مناسككم" ٣.<br>
+                                فَأَكْمَلُ مَا يَكُونُ مِنْ اَلْحَجِّ: اَلِاقْتِدَاءُ بِالنَّبِيِّ -صلى الله عليه وسلم- فِيهِ وَأَصْحَابِهِ، رَضِيَ الله عنهم.
+                            </p>
+                            <div class="border-t border-emerald-600/50 pt-6 latin-text text-emerald-100/90 text-[16px] max-w-2xl mx-auto space-y-4">
+                                <p><strong>273.</strong> Dan dahulu Nabi ﷺ melaksanakan manasik haji seraya bersabda kepada manusia: <strong>"Ambillah dariku tata cara manasik haji kalian."</strong>³</p>
+                                <p class="italic text-amber-200 mt-6 bg-emerald-950/50 p-4 rounded-xl">Maka haji yang paling sempurna adalah: Meneladani Nabi ﷺ di dalamnya, dan juga meneladani para sahabatnya radhiyallahu 'anhum.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-12">
+                        <button onclick="goToPage(0)" class="latin-text text-emerald-600 font-medium hover:text-emerald-800 underline decoration-2 underline-offset-4">
+                            Kembali ke Awal
+                        </button>
+                    </div>
+                </div>
+
+            </div> <!-- End of contentContainer -->
+
+            <!-- Bottom Navigation Bar (Fixed) -->
+            <div class="fixed bottom-0 right-0 left-0 lg:left-0 lg:mr-72 bg-white border-t border-slate-200 p-4 z-30 shadow-[0_-4px_10px_rgba(0,0,0,0.03)] flex justify-between items-center latin-text">
+                <button id="btnPrev" onclick="prevPage()" class="flex items-center gap-2 px-4 py-2 text-emerald-700 bg-emerald-50 rounded-lg font-medium hover:bg-emerald-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
+                    ← <span class="hidden sm:inline">Sebelumnya</span>
+                </button>
+                <div class="text-slate-400 text-sm font-medium">
+                    Materi <span id="pageIndicator" class="text-emerald-600 font-bold">1/10</span>
+                </div>
+                <button id="btnNext" onclick="nextPage()" class="flex items-center gap-2 px-4 py-2 text-white bg-emerald-600 rounded-lg font-medium hover:bg-emerald-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors shadow-md">
+                    <span class="hidden sm:inline">Selanjutnya</span> →
+                </button>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Data Struktur Navigasi
+        const sections = [
+            { id: 0, title: "Mukadimah", icon: "📜" },
+            { id: 1, title: "Ihram & Talbiyah", icon: "🐪" },
+            { id: 2, title: "Tawaf Baitullah & Sa'i", icon: "🕋" },
+            { id: 3, title: "Umrah & Kedatangan Ali", icon: "👥" },
+            { id: 4, title: "Hari Tarwiyah (Mina)", icon: "⛺" },
+            { id: 5, title: "Arafah & Khutbah Wada'", icon: "🤲" },
+            { id: 6, title: "Mabit di Muzdalifah", icon: "🌌" },
+            { id: 7, title: "Masy'aril Haram & Jumrah", icon: "🎯" },
+            { id: 8, title: "Menyembelih & Ifadah", icon: "🔪" },
+            { id: 9, title: "Kesimpulan Penutup", icon: "📖" }
         ];
 
-        const MCQ_LABELS = ['أ', 'ب', 'ج', 'د'];
+        let currentPage = 0;
+        const totalPages = sections.length;
 
-        const Icon = ({ name, className = "w-5 h-5" }) => {
-            const icons = {
-                'chevron-left': <polyline points="15 18 9 12 15 6" />,
-                'lock': <><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></>,
-                'clock': <><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></>,
-                'eye': <><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></>,
-                'eye-off': <><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" /><line x1="1" y1="1" x2="23" y2="23" /></>,
-                'book-open': <><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></>,
-                'check-circle-2': <><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" /><path d="m9 12 2 2 4-4" /></>,
-                'x-circle': <><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></>,
-                'trash-2': <><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /></>,
-                'edit-3': <><path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></>,
-                'database': <><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" /><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" /></>,
-                'file-plus-2': <><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4" /><polyline points="14 2 14 8 20 8" /><path d="M3 15h6" /><path d="M6 12v6" /></>,
-                'file-text': <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" /></>,
-                'chevron-up': <polyline points="18 15 12 9 6 15" />,
-                'chevron-down': <polyline points="6 9 12 15 18 9" />,
-                'calendar': <><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></>,
-                'save': <><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v13a2 2 0 0 1-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" /></>,
-                'sparkles': <><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" /><path d="M5 3v4" /><path d="M19 17v4" /><path d="M3 5h4" /><path d="M17 19h4" /></>,
-                'plus': <><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></>,
-                'minus-circle': <><circle cx="12" cy="12" r="10" /><line x1="8" y1="12" x2="16" y2="12" /></>,
-                'plus-circle': <><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="16" /><line x1="8" y1="12" x2="16" y2="12" /></>,
-                'upload-cloud': <><polyline points="16 16 12 12 8 16" /><line x1="12" y1="12" x2="12" y2="21" /><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" /></>,
-                'check': <polyline points="20 6 9 17 4 12" />,
-                'x': <><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></>,
-                'log-out': <><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></>,
-                'settings': <><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" /></>,
-                'star': <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />,
-                'shuffle': <><polyline points="16 3 21 3 21 8" /><line x1="4" y1="20" x2="21" y2="3" /><polyline points="21 16 21 21 16 21" /><line x1="15" y1="15" x2="21" y2="21" /><line x1="15" y1="15" x2="21" y2="21" /><line x1="4" y1="4" x2="9" y2="9" /></>,
-                'copy': <><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></>,
-                'sort': <path d="m15 18-3 3-3-3M15 6l-3-3-3 3M12 3v18" />,
-                'download': <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
-            };
-            return (
-                <svg 
-                    className={className} 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                >
-                    {icons[name] || null}
-                </svg>
-            );
-        };
-
-        function App() {
-            const [view, setView] = useState('cover'); 
-            const [user, setUser] = useState(null);
-            const [isTeacher, setIsTeacher] = useState(false);
-            const [teacherData, setTeacherData] = useState(null);
-            const [student, setStudent] = useState({ name: '', class: '', subject: SUBJECT_LIST[0], selectedFile: '' });
-            const [allQuestions, setAllQuestions] = useState([]);
-            const [results, setResults] = useState([]);
-            const [loading, setLoading] = useState(true);
-            const [dashTab, setDashTab] = useState('results'); 
-            const [qSubTab, setQSubTab] = useState('bank');
-            const [isSubmitting, setIsSubmitting] = useState(false);
-            const [currentIdx, setCurrentIdx] = useState(0);
-            const [activeQuizQuestions, setActiveQuizQuestions] = useState([]); 
-            const [userAnswers, setUserAnswers] = useState([]);
-            const [score, setScore] = useState(0);
-            const [maxPossibleScore, setMaxPossibleScore] = useState(0);
-            const [timeLeft, setTimeLeft] = useState(null);
-            const [teacherAuthUI, setTeacherAuthUI] = useState({ username: '', password: '', show: false, isRegistering: false });
-            const [localQuestions, setLocalQuestions] = useState([]); 
-            const [newQ, setNewQ] = useState({ q: '', a: ['', ''], c: 0, type: 'mcq', p: 10 }); 
-            const [fileName, setFileName] = useState("");
-            const [examDuration, setExamDuration] = useState(30);
-            const [examClass, setExamClass] = useState("7"); 
-            const [importText, setImportText] = useState("");
-            const [showImport, setShowImport] = useState(false);
-            const [expandedFile, setExpandedFile] = useState(null);
-            const [scheduleData, setScheduleData] = useState({ visible: true, releaseDate: '', expiryDate: '', isRandom: false });
-            const [editModal, setEditModal] = useState({ show: false, data: null, isLocal: false });
-            const [renameModal, setRenameModal] = useState({ show: false, oldName: '', newName: '', oldClass: '', newClass: '' });
-            const [resultFilterSubject, setResultFilterSubject] = useState('الكل');
-            const [resultSort, setResultSort] = useState('timestamp_desc');
-
-            const [teacherReview, setTeacherReview] = useState({ show: false, resultData: null });
-
-            const [aiLoading, setAiLoading] = useState(false);
-            const [explanation, setExplanation] = useState(null);
-            const [aiCommand, setAiCommand] = useState(""); 
-
-            const [notify, setNotify] = useState({ show: false, msg: '', type: 'info', confirm: false, onConfirm: null });
-
-            const showNotify = (msg, type = 'info', confirm = false, onConfirm = null) => {
-                setNotify({ show: true, msg, type, confirm, onConfirm });
-            };
-
-            const closeNotify = () => setNotify({ ...notify, show: false });
-
-            const t = useCallback((key) => {
-                const translations = {
-                    ar: {
-                        title: "NURUL ILMI SMART EXAM <br /> (NISE)", subtitle: "نظام نور العلم للاختبارات الذكية", startBtn: "ابدأ الاختبار",
-                        studentName: "اسم الطالب", studentClass: "الفصل الدراسي", subject: "المادة الدراسية",
-                        chooseFile: "-- اختر ملف الاختبار --", teacherPanel: "لوحة المعلم",
-                        login: "تسجيل دخول", register: "إنشاء حساب", username: "اسم المستخدم", password: "كلمة المرور",
-                        cancel: "إلغاء", logout: "خروج", dashboard: "إدارة المنصة", results: "النتائج",
-                        questions: "الأسئلة", bank: "بنك الأسئلة", add: "إضافة الأسئلة", save: "حفظ",
-                        import: "استيراد سريع", next: "السؤال التالي", prev: "السابق", send: "إرسال الإجابات",
-                        score: "الدرجة", total: "المجموع", review: "مراجعة الإجابات", finish: "إنهاء",
-                        noTests: "لا توجد اختبارات متاحة", mcq: "خيار متعدد", tf: "صح وخطأ",
-                        correct: "صح", wrong: "خطأ", student: "الطالب", class: "الفصل", delete: "حذف", deleteAll: "حذف الكل",
-                        visible: "مرئي", hidden: "مخفي", schedule: "الجدولة", qPlaceholder: "اكتب نص السؤال هنا...",
-                        importPlaceholder: "نص السؤال | خيار1, خيار2, خيار3, خيار4 | 0", answerLabel: "الجواب: ",
-                        saveBank: "حفظ الاختبار في البنك", previewTitle: "معاينة الأسئلة",
-                        examFile: "ملف الاختبار", duration: "المدة (دقائق)", yes: "نعم", no: "لا",
-                        points: "النقاط", renameFile: "تغيير اسم الملف والفصل", addMoreQs: "إضافة أسئلة لهذا الملف",
-                        randomize: "ترتيب عشوائي", duplicateFile: "مضاعفة الملف",
-                        exportExcel: "تصدير للتميز (Excel)",
-                        reviewStudent: "مراجعة إجابات الطالب"
-                    }
-                };
-                return translations['ar'][key] || key;
-            }, []);
-
-            const callGemini = async (prompt, systemPrompt = "", isJson = false) => {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-                const body = {
-                    contents: [{ parts: [{ text: prompt }] }],
-                    systemInstruction: { parts: [{ text: systemPrompt }] }
-                };
-                if (isJson) {
-                    body.generationConfig = { 
-                        responseMimeType: "application/json",
-                        responseSchema: {
-                            type: "OBJECT",
-                            properties: {
-                                questions: {
-                                    type: "ARRAY",
-                                    items: {
-                                        type: "OBJECT",
-                                        properties: {
-                                            q: { type: "STRING" },
-                                            a: { type: "ARRAY", items: { type: "STRING" } },
-                                            c: { type: "NUMBER" },
-                                            type: { type: "STRING" },
-                                            p: { type: "NUMBER" }
-                                        },
-                                        required: ["q", "a", "c", "type", "p"]
-                                    }
-                                }
-                            }
-                        }
-                    };
-                }
-
-                for (let i = 0; i < 5; i++) {
-                    try {
-                        const response = await fetch(url, {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(body)
-                        });
-                        const data = await response.json();
-                        return data.candidates?.[0]?.content?.parts?.[0]?.text;
-                    } catch (e) {
-                        const delay = Math.pow(2, i) * 1000;
-                        await new Promise(res => setTimeout(res, delay));
-                    }
-                }
-                throw new Error("فشل الاتصال بالذكاء الاصطناعي");
-            };
-
-            const generateAiQuestions = async () => {
-                if (!fileName) return showNotify("يرجى إدخال اسم ملف الاختبار أولاً", "error");
-                if (!aiCommand.trim()) return showNotify("يرجى كتابة ما تطلبه من الذكاء الاصطناعي أولاً (مثلاً: اكتب 5 أسئلة في الفقه)", "warning");
-                
-                setAiLoading(true);
-                try {
-                    const prompt = `الموضوع: ${student.subject}.\nأمر المعلم: ${aiCommand}.\nيرجى توليد الأسئلة المطلوبة باللغة العربية.`;
-                    const systemPrompt = "أنت مساعد تعليمي خبير. قم بتوليد الأسئلة المطلوبة بدقة تربوية وفقاً لموضوع المادة المحددة وأمر المعلم. يجب أن تكون الإجابات دقيقة. عيّن قيمة 10 نقاط (p: 10) لكل سؤال بشكل افتراضي.";
-                    const resultText = await callGemini(prompt, systemPrompt, true);
-                    const parsed = JSON.parse(resultText);
-                    
-                    const aiQs = parsed.questions.map((q, idx) => ({
-                        ...q,
-                        p: q.p || 10,
-                        id: Date.now() + idx
-                    }));
-                    setLocalQuestions([...localQuestions, ...aiQs]);
-                    setAiCommand(""); 
-                    showNotify(`تم توليد ${aiQs.length} أسئلة ذكية بنجاح!`, "success");
-                } catch (e) {
-                    showNotify("فشل توليد الأسئلة: " + e.message, "error");
-                } finally {
-                    setAiLoading(false);
-                }
-            };
-
-            const explainQuestion = async (q, correctIdx, userIdx) => {
-                setAiLoading(true);
-                setExplanation(null);
-                try {
-                    const prompt = `السؤال: ${q.q}\nالخيارات: ${q.a.join(', ')}\nالخيار الصحيح هو الخيار رقم ${correctIdx + 1} (${q.a[correctIdx]}).\nلقد أجاب الطالب بـ ${userIdx !== null ? q.a[userIdx] : 'لم يجب'}.\nاشرح لي بوضوح وببساطة لماذا هذه هي الإجابة الصحيحة وما هو المبدأ العلمي أو اللغوي وراء ذلك.`;
-                    const systemPrompt = "أنت مدرس صبور وحكيم. اشرح الإجابات بأسلوب تعليمي مشجع باللغة العربية.";
-                    const explanationText = await callGemini(prompt, systemPrompt);
-                    setExplanation(explanationText);
-                } catch (e) {
-                    showNotify("فشل الحصول على شرح: " + e.message, "error");
-                } finally {
-                    setAiLoading(false);
-                }
-            };
-
-            const handleTeacherAuth = async () => {
-                if (!user) return;
-                const { username, password, isRegistering } = teacherAuthUI;
-                if (!username || !password) return showNotify("يرجى إدخال البيانات كاملة");
-                
-                try {
-                    const profilesRef = sdk.collection(db, 'artifacts', appId, 'public', 'data', 'teacher_profiles');
-                    const snap = await sdk.getDocs(profilesRef);
-                    const profiles = snap.docs.map(d => ({ ...d.data(), id: d.id }));
-                    
-                    if (isRegistering) {
-                        if (profiles.find(p => p.username === username)) return showNotify("المستخدم موجود بالفعل", 'error');
-                        await sdk.addDoc(profilesRef, { username, password, timestamp: sdk.serverTimestamp(), userId: user.uid });
-                        showNotify("تم إنشاء الحساب بنجاح!", 'success');
-                        setTeacherAuthUI(p => ({ ...p, isRegistering: false }));
-                    } else {
-                        const found = profiles.find(p => p.username === username && p.password === password);
-                        if (!found) return showNotify("خطأ في اسم المستخدم أو كلمة المرور", 'error');
-                        setTeacherData(found); setIsTeacher(true); setView('dashboard'); setTeacherAuthUI(p => ({ ...p, show: false }));
-                    }
-                } catch (e) { showNotify("خطأ: " + e.message, 'error'); }
-            };
-
-            const addToLocal = () => {
-                if (!newQ.q.trim()) return;
-                setLocalQuestions([...localQuestions, { ...newQ, id: Date.now() }]);
-                setNewQ({ q: '', a: newQ.type === 'tf' ? ['صح', 'خطأ'] : ['', ''], c: 0, type: newQ.type, p: 10 });
-            };
-
-            const saveEditedQuestion = async () => {
-                if (!editModal.data) return;
-                if (editModal.isLocal) {
-                    setLocalQuestions(localQuestions.map(q => q.id === editModal.data.id ? editModal.data : q));
-                    setEditModal({ show: false, data: null, isLocal: false });
-                    showNotify("تم تحديث السؤال في المعاينة", 'success');
-                    return;
-                }
-                try {
-                    const qRef = sdk.doc(db, 'artifacts', appId, 'public', 'data', 'questions_db', String(editModal.data.id));
-                    await sdk.updateDoc(qRef, { q: editModal.data.q, a: editModal.data.a, c: editModal.data.c, type: editModal.data.type, p: Number(editModal.data.p) });
-                    setEditModal({ show: false, data: null, isLocal: false });
-                    showNotify("تم تحديث السؤال بنجاح", 'success');
-                } catch (e) { console.error(e); }
-            };
-
-            const duplicateFileBank = async (oldName) => {
-                const qsToCopy = groupedQuestions[oldName];
-                if (!qsToCopy || qsToCopy.length === 0) return;
-                const newFileName = `${oldName} (نسخة)`;
-                try {
-                    const batch = sdk.writeBatch(db);
-                    qsToCopy.forEach(q => {
-                        const docRef = sdk.doc(sdk.collection(db, 'artifacts', appId, 'public', 'data', 'questions_db'));
-                        const { id, ...cleanData } = q;
-                        batch.set(docRef, { ...cleanData, fileName: newFileName, timestamp: sdk.serverTimestamp() });
-                    });
-                    await batch.commit();
-                    showNotify("تم مضاعفة الملف بنجاح", 'success');
-                } catch (e) { showNotify("فشل مضاعفة الملف", 'error'); }
-            };
-
-            const renameFileBank = async () => {
-                const { oldName, newName, newClass } = renameModal;
-                if (!newName.trim()) return showNotify("يرجى إدخال اسم ملف صالح", 'error');
-                try {
-                    const batch = sdk.writeBatch(db);
-                    const toUpdate = allQuestions.filter(q => q.fileName === oldName);
-                    toUpdate.forEach(q => {
-                        const qRef = sdk.doc(db, 'artifacts', appId, 'public', 'data', 'questions_db', String(q.id));
-                        batch.update(qRef, { fileName: newName, examClass: newClass });
-                    });
-                    await batch.commit();
-                    setExpandedFile(newName);
-                    setRenameModal({ show: false, oldName: '', newName: '', oldClass: '', newClass: '' });
-                    showNotify("تم تحديث البيانات بنجاح", 'success');
-                } catch (e) { showNotify("فشل التحديث", 'error'); }
-            };
-
-            const prepareAddMoreQs = (fName) => {
-                const firstQ = groupedQuestions[fName][0];
-                if (!firstQ) return;
-                setFileName(fName);
-                setStudent(prev => ({ ...prev, subject: firstQ.subject }));
-                setExamClass(firstQ.examClass || "7");
-                setExamDuration(firstQ.duration || 30);
-                setQSubTab('add');
-            };
-
-            const saveQuestionsToDB = async () => {
-                if (!fileName.trim()) return showNotify("⚠️ يجب إدخال اسم ملف الاختبار قبل الحفظ!", 'error');
-                if (localQuestions.length === 0) return showNotify("يرجى إضافة أسئلة أولاً");
-                if (!user) return;
-                try {
-                    const batch = sdk.writeBatch(db);
-                    localQuestions.forEach(q => {
-                        const docRef = sdk.doc(sdk.collection(db, 'artifacts', appId, 'public', 'data', 'questions_db'));
-                        const { id, ...cleanData } = q;
-                        batch.set(docRef, { ...cleanData, fileName, subject: student.subject, examClass, duration: parseInt(examDuration), authorId: teacherData.id, visible: true, timestamp: sdk.serverTimestamp(), userId: user.uid });
-                    });
-                    await batch.commit();
-                    setLocalQuestions([]); setFileName(""); setQSubTab('bank'); showNotify("تم الحفظ بنجاح", 'success');
-                } catch (e) { showNotify("فشل الحفظ: " + e.message, 'error'); }
-            };
-
-            const deleteSingleResult = (resId) => {
-                showNotify("هل تود حذف هذه النتيجة؟", 'warning', true, async () => {
-                    try {
-                        const docRef = sdk.doc(db, 'artifacts', appId, 'public', 'data', 'quiz_results', String(resId));
-                        await sdk.deleteDoc(docRef);
-                        showNotify("تم الحذف بنجاح", 'success');
-                    } catch (e) { showNotify("فشل الحذف", 'error'); }
-                });
-            };
-
-            const deleteSingleQuestion = (qId) => {
-                showNotify("حذف السؤال نهائياً؟", 'warning', true, async () => {
-                    try {
-                        const docRef = sdk.doc(db, 'artifacts', appId, 'public', 'data', 'questions_db', String(qId));
-                        await sdk.deleteDoc(docRef);
-                    } catch (e) { showNotify("فشل حذف السؤال", 'error'); }
-                });
-            };
-
-            const deleteFileBank = (fName) => {
-                showNotify(`سيتم حذف ملف "${fName}" بجميع أسئلته، هل أنت متأكد؟`, 'warning', true, async () => {
-                    try {
-                        const batch = sdk.writeBatch(db);
-                        const toDelete = allQuestions.filter(q => q.fileName === fName);
-                        toDelete.forEach(q => {
-                            const docRef = sdk.doc(db, 'artifacts', appId, 'public', 'data', 'questions_db', String(q.id));
-                            batch.delete(docRef);
-                        });
-                        await batch.commit();
-                        setExpandedFile(null);
-                        showNotify("تم حذف الملف بنجاح", 'success');
-                    } catch (e) { showNotify("فشل حذف الملف", 'error'); }
-                });
-            };
-
-            const saveScheduleSettings = async (fName) => {
-                try {
-                    const batch = sdk.writeBatch(db);
-                    const toUpdate = allQuestions.filter(q => q.fileName === fName);
-                    toUpdate.forEach(q => {
-                        const qRef = sdk.doc(db, 'artifacts', appId, 'public', 'data', 'questions_db', String(q.id));
-                        batch.update(qRef, { visible: scheduleData.visible, releaseDate: scheduleData.releaseDate, expiryDate: scheduleData.expiryDate, isRandom: scheduleData.isRandom });
-                    });
-                    await batch.commit();
-                    showNotify("تم تحديث الإعدادات", 'success');
-                } catch (e) { console.error(e); }
-            };
-
-            const processImport = () => {
-                const lines = importText.split('\n').filter(l => l.trim());
-                const imported = lines.map((line, idx) => {
-                    const parts = line.split('|');
-                    if (parts.length >= 2) {
-                        const opts = parts[1].split(',').map(o => o.trim());
-                        return { id: Date.now() + idx, q: parts[0].trim(), a: opts, c: parseInt(parts[2]) || 0, type: opts.length === 2 ? 'tf' : 'mcq', p: 10 };
-                    }
-                    return null;
-                }).filter(q => q !== null);
-                setLocalQuestions([...localQuestions, ...imported]);
-                setShowImport(false); setImportText("");
-            };
-
-            const exportToExcel = () => {
-                if (filteredResults.length === 0) return showNotify("لا توجد بيانات لتصديرها", "warning");
-                const headers = ["اسم الطالب", "المادة", "الفصل", "الدرجة", "المجموع", "التاريخ"];
-                const rows = filteredResults.map(r => [
-                    r.student_name, r.subject, r.student_class, r.score, r.total,
-                    r.timestamp ? new Date(r.timestamp.seconds * 1000).toLocaleString('ar-EG') : '-'
-                ]);
-                let csvContent = "\uFEFF"; 
-                csvContent += headers.join(",") + "\n";
-                rows.forEach(row => { csvContent += row.map(cell => `"${cell}"`).join(",") + "\n"; });
-                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement("a");
-                link.setAttribute("href", url);
-                link.setAttribute("download", `نتائج_${resultFilterSubject}_${new Date().toLocaleDateString()}.csv`);
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                showNotify("تم تصدير الملف بنجاح", "success");
-            };
-
-            const startExam = () => {
-                const qs = allQuestions.filter(q => q.subject === student.subject && q.fileName === student.selectedFile);
-                if (qs.length === 0) return showNotify("⚠️ لا توجد أسئلة متاحة حالياً", 'error');
-                if (!student.name || !student.class) return showNotify("⚠️ يرجى إكمال بيانات الطالب", 'error');
-                let finalQs = [...qs];
-                if (qs[0]?.isRandom) {
-                    for (let i = finalQs.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [finalQs[i], finalQs[j]] = [finalQs[j], finalQs[i]];
-                    }
-                }
-                setActiveQuizQuestions(finalQs);
-                setTimeLeft((qs[0]?.duration || 30) * 60);
-                setUserAnswers(new Array(qs.length).fill(null));
-                setCurrentIdx(0);
-                setIsSubmitting(false);
-                setView('quiz');
-            };
-
-            const submitFinalQuiz = async () => {
-                if (isSubmitting || !user) return;
-                setIsSubmitting(true);
-                const quizAuthorId = activeQuizQuestions[0]?.authorId || null;
-                
-                let finalScore = 0;
-                let totalPossible = 0;
-                userAnswers.forEach((ans, idx) => { 
-                    const qPoints = activeQuizQuestions[idx].p || 10;
-                    totalPossible += qPoints;
-                    if (activeQuizQuestions[idx] && ans === activeQuizQuestions[idx].c) finalScore += qPoints; 
-                });
-                
-                setScore(finalScore);
-                setMaxPossibleScore(totalPossible);
-                
-                try {
-                    await sdk.addDoc(sdk.collection(db, 'artifacts', appId, 'public', 'data', 'quiz_results'), {
-                        student_name: student.name,
-                        student_class: student.class,
-                        subject: student.subject,
-                        fileName: student.selectedFile,
-                        score: finalScore,
-                        total: totalPossible,
-                        timestamp: sdk.serverTimestamp(),
-                        userId: user.uid,
-                        quizAuthorId,
-                        user_answers: userAnswers,
-                        questions_snapshot: activeQuizQuestions.map(q => ({ q: q.q, a: q.a, c: q.c, type: q.type, p: q.p }))
-                    });
-                    setView('result');
-                } catch (e) { 
-                    console.error(e);
-                    setIsSubmitting(false); 
-                }
-            };
-
-            useEffect(() => {
-                const initAuth = async () => {
-                    try {
-                        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                            try { await sdk.signInWithCustomToken(auth, __initial_auth_token); } catch (tErr) { await sdk.signInAnonymously(auth); }
-                        } else { await sdk.signInAnonymously(auth); }
-                    } catch (e) { console.error(e); } finally { setLoading(false); }
-                };
-                initAuth();
-                const unsubscribe = sdk.onAuthStateChanged(auth, (u) => setUser(u));
-                return () => unsubscribe();
-            }, []);
-
-            useEffect(() => {
-                if (!user) return;
-                const unsubQuestions = sdk.onSnapshot(sdk.collection(db, 'artifacts', appId, 'public', 'data', 'questions_db'), 
-                    (snap) => setAllQuestions(snap.docs.map(d => ({ ...d.data(), id: String(d.id) }))),
-                    (err) => console.error(err)
-                );
-                const unsubResults = sdk.onSnapshot(sdk.collection(db, 'artifacts', appId, 'public', 'data', 'quiz_results'), 
-                    (snap) => setResults(snap.docs.map(d => ({ ...d.data(), id: String(d.id) }))),
-                    (err) => console.error(err)
-                );
-                return () => { unsubQuestions(); unsubResults(); };
-            }, [user]);
-
-            useEffect(() => {
-                if (view === 'quiz' && timeLeft > 0 && !isSubmitting) {
-                    const timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
-                    return () => clearInterval(timer);
-                } else if (view === 'quiz' && timeLeft === 0 && !isSubmitting) {
-                    submitFinalQuiz();
-                }
-            }, [view, timeLeft, isSubmitting]);
-
-            const availableFiles = useMemo(() => {
-                const now = Date.now();
-                return [...new Set(allQuestions.filter(q => {
-                    if (q.subject !== student.subject) return false;
-                    if (q.visible === false) return false;
-                    if (q.releaseDate && q.releaseDate.trim() !== "" && now < new Date(q.releaseDate).getTime()) return false;
-                    if (q.expiryDate && q.expiryDate.trim() !== "" && now > new Date(q.expiryDate).getTime()) return false;
-                    return true;
-                }).map(q => q.fileName))];
-            }, [allQuestions, student.subject]);
-
-            const groupedQuestions = useMemo(() => {
-                const groups = {};
-                allQuestions.forEach(q => {
-                    if (isTeacher && teacherData && q.authorId !== teacherData.id) return;
-                    if (!groups[q.fileName]) groups[q.fileName] = [];
-                    groups[q.fileName].push(q);
-                });
-                return groups;
-            }, [allQuestions, isTeacher, teacherData]);
-
-            const filteredResults = useMemo(() => {
-                let data = [...results];
-                if (isTeacher && teacherData) data = data.filter(r => r.quizAuthorId === teacherData.id);
-                if (resultFilterSubject !== 'الكل') data = data.filter(r => r.subject === resultFilterSubject);
-                data.sort((a, b) => {
-                    if (resultSort === 'timestamp_desc') return (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0);
-                    if (resultSort === 'timestamp_asc') return (a.timestamp?.seconds || 0) - (b.timestamp?.seconds || 0);
-                    if (resultSort === 'score_desc') return (b.score || 0) - (a.score || 0);
-                    if (resultSort === 'score_asc') return (a.score || 0) - (b.score || 0);
-                    if (resultSort === 'student_name_asc') return a.student_name.localeCompare(b.student_name, 'ar');
-                    if (resultSort === 'student_name_desc') return b.student_name.localeCompare(a.student_name, 'ar');
-                    return 0;
-                });
-                return data;
-            }, [results, resultFilterSubject, resultSort, isTeacher, teacherData]);
-
-            const progressPercent = useMemo(() => (activeQuizQuestions.length === 0 ? 0 : (userAnswers.filter(a => a !== null).length / activeQuizQuestions.length) * 100), [userAnswers, activeQuizQuestions]);
-
-            const formatTime = (seconds) => {
-                const m = Math.floor(seconds / 60);
-                const s = (seconds % 60).toString().padStart(2, '0');
-                return `${m}:${s}`;
-            };
-
-            if (loading) return <div className="min-h-screen flex items-center justify-center bg-slate-50 font-bold">جاري التحميل...</div>;
-
-            return (
-                <div className="min-h-screen text-[#1e293b] font-tajawal text-right overflow-x-hidden" dir="rtl">
-                    
-                    {/* NOTIFICATION MODAL */}
-                    {notify.show && (
-                        <div className="fixed inset-0 modal-overlay z-[1300] flex items-center justify-center p-4">
-                            <div className="bg-white p-8 rounded-[2.5rem] max-w-sm w-full shadow-2xl animate-in text-center border-t-8 border-emerald-500">
-                                <div className="text-5xl mb-4">{notify.type === 'success' ? '✅' : notify.type === 'error' ? '❌' : notify.type === 'warning' ? '⚠️' : 'ℹ️'}</div>
-                                <p className="text-lg font-black text-slate-800 mb-8">{notify.msg}</p>
-                                <div className="flex gap-4">
-                                    {notify.confirm ? (
-                                        <>
-                                            <button onClick={() => { notify.onConfirm(); closeNotify(); }} className="flex-1 bg-emerald-600 text-white py-4 rounded-2xl font-black shadow-lg active:scale-95">{t('yes')}</button>
-                                            <button onClick={closeNotify} className="flex-1 bg-slate-100 text-slate-500 py-4 rounded-2xl font-black active:scale-95">{t('no')}</button>
-                                        </>
-                                    ) : (
-                                        <button onClick={closeNotify} className="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black shadow-lg">موافق</button>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* AI EXPLANATION MODAL (ONLY IN REVIEW) */}
-                    {explanation && (
-                        <div className="fixed inset-0 modal-overlay z-[1100] flex items-center justify-center p-4">
-                            <div className="bg-white p-8 rounded-[3rem] max-w-lg w-full shadow-2xl animate-in border-t-[12px] border-violet-500 relative max-h-[90vh] flex flex-col">
-                                <button onClick={() => setExplanation(null)} className="absolute top-4 left-4 p-2.5 bg-slate-100 rounded-full hover:bg-red-50 hover:text-red-500 transition-all z-10">
-                                    <Icon name="x" className="w-6 h-6" />
-                                </button>
-                                <div className="flex items-center gap-3 mb-6 text-violet-600 shrink-0">
-                                    <div className="w-10 h-10 bg-violet-100 rounded-xl flex items-center justify-center">✨</div>
-                                    <h3 className="text-xl font-black">شرح الإجابة من الذكاء الاصطناعي</h3>
-                                </div>
-                                <div className="text-slate-700 leading-relaxed font-bold whitespace-pre-line text-sm overflow-y-auto pr-2 hide-scroll">{explanation}</div>
-                                <button onClick={() => setExplanation(null)} className="w-full mt-8 bg-violet-600 text-white py-4 rounded-2xl font-black shadow-xl hover:bg-violet-700 transition-all active:scale-95 shrink-0">فهمت، شكراً لك!</button>
-                            </div>
-                        </div>
-                    )}
-
-                    {aiLoading && (
-                        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[1200] flex flex-col items-center justify-center gap-4">
-                            <div className="w-24 h-24 rounded-[2rem] gemini-loading shadow-2xl flex items-center justify-center text-white text-4xl animate-bounce">✨</div>
-                            <p className="text-white font-black text-xl animate-pulse">جاري الاستعانة بالذكاء الاصطناعي...</p>
-                        </div>
-                    )}
-
-                    {/* TEACHER REVIEW MODAL */}
-                    {teacherReview.show && teacherReview.resultData && (
-                        <div className="fixed inset-0 modal-overlay z-[700] flex items-center justify-center p-4">
-                            <div className="bg-white rounded-[3.5rem] max-w-5xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in text-right">
-                                <div className="bg-indigo-900 p-6 text-white flex justify-between items-center shrink-0 border-b border-white/10">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center">
-                                            <Icon name="eye" className="text-emerald-400 w-6 h-6" />
-                                        </div>
-                                        <div>
-                                            <h2 className="text-xl font-black">{t('reviewStudent')}</h2>
-                                            <p className="text-[11px] opacity-70 font-bold tracking-widest">{teacherReview.resultData.student_name} • {teacherReview.resultData.subject} • {teacherReview.resultData.student_class}</p>
-                                        </div>
-                                    </div>
-                                    <button onClick={() => setTeacherReview({ show: false, resultData: null })} className="bg-white/10 p-2.5 rounded-2xl transition-all hover:bg-red-500/20 hover:text-red-400">
-                                        <Icon name="x" className="w-6 h-6" />
-                                    </button>
-                                </div>
-                                
-                                <div className="flex-1 overflow-y-auto p-6 md:p-8 bg-slate-50/50 hide-scroll">
-                                    {(!teacherReview.resultData.questions_snapshot || teacherReview.resultData.questions_snapshot.length === 0) ? (
-                                        <div className="py-20 text-center text-slate-400 font-bold italic">عذراً، هذا التقرير قديم ولا يحتوي على تفاصيل الإجابات.</div>
-                                    ) : (
-                                        <div className="grid grid-cols-1 gap-4">
-                                            {teacherReview.resultData.questions_snapshot.map((q, idx) => {
-                                                const studentAns = teacherReview.resultData.user_answers[idx];
-                                                const isCorrect = studentAns === q.c;
-                                                const isUnanswered = studentAns === null;
-                                                
-                                                return (
-                                                    <div key={idx} className="bg-white p-5 md:p-6 rounded-[2.5rem] border border-slate-100 shadow-sm transition-all hover:shadow-md">
-                                                        <div className="flex items-start gap-4 mb-4">
-                                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shrink-0 ${isCorrect ? 'bg-emerald-100 text-emerald-600' : isUnanswered ? 'bg-slate-100 text-slate-400' : 'bg-red-100 text-red-600'}`}>
-                                                                {idx + 1}
-                                                            </div>
-                                                            <div className="flex-1">
-                                                                <h3 className="text-base md:text-lg font-black text-slate-800 leading-relaxed">{q.q}</h3>
-                                                            </div>
-                                                            <div className="shrink-0 flex items-center gap-2">
-                                                                <span className={`px-3 py-1.5 rounded-full text-[10px] font-black tracking-tight ${isCorrect ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : isUnanswered ? 'bg-slate-100 text-slate-500' : 'bg-red-50 text-red-600 border border-red-100'}`}>
-                                                                    {isCorrect ? 'إجابة صحيحة' : isUnanswered ? 'لم يجب' : 'إجابة خاطئة'}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
-                                                            {q.a.map((opt, optIdx) => (opt && (q.type === 'mcq' || optIdx < 2)) && (
-                                                                <div key={optIdx} className={`px-4 py-3 rounded-2xl border-2 text-xs font-bold transition-all flex items-center gap-3 ${optIdx === q.c ? 'border-emerald-500 bg-emerald-50/50 text-emerald-700' : optIdx === studentAns ? 'border-red-500 bg-red-50/50 text-red-700' : 'border-slate-50 bg-slate-50/50 text-slate-400'}`}>
-                                                                    <span className={`w-6 h-6 rounded-lg flex items-center justify-center font-black ${optIdx === q.c ? 'bg-emerald-500 text-white' : optIdx === studentAns ? 'bg-red-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
-                                                                        {q.type === 'tf' ? (optIdx === 0 ? '✓' : '✗') : MCQ_LABELS[optIdx]}
-                                                                    </span>
-                                                                    <span className="truncate">{opt}</span>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                );
-                                            })}
-                                        </div>
-                                    )}
-                                </div>
-                                
-                                <div className="p-6 bg-white border-t flex justify-center shrink-0">
-                                    <button onClick={() => setTeacherReview({ show: false, resultData: null })} className="bg-slate-900 text-white px-10 py-4 rounded-[2rem] font-black shadow-xl transition-all active:scale-95 hover:bg-slate-800 flex items-center gap-2">
-                                        <span>إغلاق المراجعة</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* MAIN UI */}
-                    {view === 'cover' && (
-                        <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-emerald-50 to-indigo-50">
-                            <div className="max-w-md w-full bg-white rounded-[4rem] shadow-2xl p-12 flex flex-col items-center border-t-[16px] border-emerald-600 animate-in">
-                                <div className="w-28 h-28 bg-emerald-600 rounded-[2.5rem] flex items-center justify-center text-6xl mb-10 text-white shadow-xl">🕌</div>
-                                <h1 className="text-3xl md:text-4xl font-black text-slate-800 mb-2 text-center" dangerouslySetInnerHTML={{ __html: t('title') }}></h1>
-                                <p className="text-emerald-600 font-bold opacity-80 mb-10 text-xs uppercase tracking-widest text-center">{t('subtitle')}</p>
-                                <div className="w-full space-y-4 mb-10">
-                                    <div className="space-y-1">
-                                        <label className="text-[10px] font-black text-slate-400 px-2 uppercase tracking-widest">{t('subject')}</label>
-                                        <select className="w-full p-5 bg-slate-50 border-2 rounded-2xl font-black text-center outline-none focus:border-emerald-500 shadow-sm" value={student.subject} onChange={e => setStudent({...student, subject: e.target.value, selectedFile: ''})}>
-                                            {SUBJECT_LIST.map(s => <option key={s} value={s}>{s}</option>)}
-                                        </select>
-                                    </div>
-                                    <div className="space-y-1">
-                                        <label className="text-[10px] font-black text-slate-400 px-2 uppercase tracking-widest">{t('examFile')}</label>
-                                        <select className="w-full p-5 bg-slate-50 border-2 rounded-2xl font-black text-center outline-none focus:border-emerald-500 shadow-sm disabled:opacity-50" value={student.selectedFile} onChange={e => setStudent({...student, selectedFile: e.target.value})} disabled={availableFiles.length === 0}>
-                                            <option value="">{t('chooseFile')}</option>
-                                            {availableFiles.map(f => <option key={f} value={f}>{f}</option>)}
-                                        </select>
-                                    </div>
-                                    <div className="space-y-1">
-                                        <label className="text-[10px] font-black text-slate-400 px-2 uppercase tracking-widest">{t('studentName')}</label>
-                                        <input type="text" placeholder={t('studentName')} className="w-full p-5 bg-slate-50 border-2 rounded-2xl font-black text-center outline-none focus:border-emerald-500 shadow-sm" value={student.name} onChange={e => setStudent({...student, name: e.target.value})} />
-                                    </div>
-                                    <div className="space-y-1">
-                                        <label className="text-[10px] font-black text-slate-400 px-2 uppercase tracking-widest">{t('studentClass')}</label>
-                                        <input type="text" placeholder={t('studentClass')} className="w-full p-5 bg-slate-50 border-2 rounded-2xl font-black text-center outline-none focus:border-emerald-500 shadow-sm" value={student.class} onChange={e => setStudent({...student, class: e.target.value})} />
-                                    </div>
-                                </div>
-                                <button onClick={startExam} className="w-full bg-emerald-600 text-white font-black py-6 rounded-[2rem] shadow-2xl flex items-center justify-center gap-4 text-2xl active:scale-95 disabled:opacity-50 transition-all" disabled={!student.selectedFile || !student.name}>
-                                    {t('startBtn')} <Icon name="chevron-left" className="w-8 h-8" />
-                                </button>
-                                <button onClick={() => setTeacherAuthUI({...teacherAuthUI, show: true})} className="mt-10 text-slate-400 text-xs font-black flex items-center gap-2 hover:text-emerald-600 transition-colors">
-                                    <Icon name="lock" className="w-4 h-4" /> {t('teacherPanel')}
-                                </button>
-                            </div>
-                        </div>
-                    )}
-
-                    {view === 'quiz' && activeQuizQuestions[currentIdx] && (
-                        <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-slate-50">
-                            <div className="max-w-3xl w-full bg-white rounded-[3rem] shadow-2xl overflow-hidden border flex flex-col animate-in">
-                                <div className="w-full h-2 bg-slate-100"><div className="h-full bg-emerald-500 transition-all duration-500" style={{ width: `${progressPercent}%` }}></div></div>
-                                <div className="bg-emerald-600 p-6 text-white flex justify-between items-center font-black">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center font-black font-bold">{currentIdx + 1} / {activeQuizQuestions.length}</div>
-                                        <div className="text-right">
-                                            <h2 className="text-lg font-black">{student.subject} {activeQuizQuestions[0].examClass && <span className="mr-2 text-emerald-200">| الفصل {activeQuizQuestions[0].examClass}</span>}</h2>
-                                            <p className="text-[10px] opacity-70 font-bold">{student.selectedFile}</p>
-                                        </div>
-                                    </div>
-                                    <div className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black ${timeLeft < 60 ? 'bg-red-50 text-red-600 animate-pulse' : 'bg-black/20'}`}>
-                                        <Icon name="clock" className="w-4 h-4" />
-                                        <span>{formatTime(timeLeft)}</span>
-                                    </div>
-                                </div>
-                                <div className="p-8 md:p-12 text-center space-y-10">
-                                    <h3 className="text-2xl md:text-3xl font-black text-slate-800 leading-relaxed text-center">{activeQuizQuestions[currentIdx].q}</h3>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        {activeQuizQuestions[currentIdx].a.map((opt, i) => (opt && (activeQuizQuestions[currentIdx].type === 'mcq' || i < 2)) && (
-                                            <button key={i} onClick={() => { const na = [...userAnswers]; na[currentIdx] = i; setUserAnswers(na); }} className={`p-6 rounded-3xl font-bold border-2 transition-all flex items-center gap-4 text-right ${userAnswers[currentIdx] === i ? 'bg-emerald-600 border-emerald-600 text-white shadow-lg scale-[1.02]' : 'bg-white hover:bg-slate-50 border-slate-100'}`}>
-                                                <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black shrink-0 ${userAnswers[currentIdx] === i ? 'bg-white/20' : 'bg-slate-100 text-slate-400'}`}>{activeQuizQuestions[currentIdx].type === 'tf' ? (i === 0 ? '✓' : '✗') : MCQ_LABELS[i]}</span>
-                                                <span className="flex-1 text-lg font-black">{opt}</span>
-                                            </button>
-                                        ))}
-                                    </div>
-                                    <div className="flex gap-4 pt-10">
-                                        <button onClick={() => currentIdx === activeQuizQuestions.length - 1 ? submitFinalQuiz() : setCurrentIdx(currentIdx + 1)} className="flex-1 bg-emerald-600 text-white py-5 rounded-[2rem] font-black text-xl shadow-xl transition-all active:scale-95 font-bold">
-                                            {currentIdx === activeQuizQuestions.length - 1 ? t('send') : t('next')}
-                                        </button>
-                                        {currentIdx > 0 && <button onClick={() => setCurrentIdx(currentIdx - 1)} className="px-10 bg-slate-100 text-slate-500 py-5 rounded-[2rem] font-black active:scale-95 transition-all font-bold">{t('prev')}</button>}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {view === 'result' && (
-                        <div className="min-h-screen flex items-center justify-center p-4">
-                            <div className="max-w-md w-full bg-white rounded-[4rem] shadow-2xl p-12 text-center border-t-[16px] border-emerald-600 animate-in">
-                                <div className="text-8xl mb-8">🎖️</div>
-                                <h2 className="text-2xl font-black text-slate-400 mb-2">لقد حصلت على:</h2>
-                                <p className="text-emerald-600 font-bold mb-10 text-2xl tracking-tight font-black">{student.name}</p>
-                                
-                                <div className="bg-emerald-50 py-10 rounded-[4rem] mb-12 border border-emerald-100 shadow-inner flex items-center justify-center gap-3">
-                                    <span className="text-8xl font-[950] text-emerald-700 tracking-tighter">{score}</span>
-                                    <span className="text-4xl text-emerald-300 font-bold">/</span>
-                                    <span className="text-5xl font-black text-emerald-600/50">{maxPossibleScore}</span>
-                                </div>
-                                
-                                <div className="space-y-4">
-                                    <button onClick={() => setView('review')} className="w-full bg-emerald-600 text-white py-5 rounded-[2rem] font-black shadow-xl text-xl flex items-center justify-center gap-2 font-bold"><Icon name="eye" className="w-6 h-6" /> {t('review')}</button>
-                                    <button onClick={() => window.location.reload()} className="w-full bg-slate-800 text-white py-5 rounded-[2rem] font-black shadow-xl text-xl font-bold">{t('finish')}</button>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {view === 'review' && (
-                        <div className="min-h-screen p-4 md:p-8 bg-slate-50 flex flex-col items-center">
-                            <div className="max-w-3xl w-full bg-white rounded-[3rem] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-                                <div className="bg-slate-900 p-6 text-white flex justify-between items-center font-bold shrink-0">
-                                    <div className="flex items-center gap-3"><Icon name="book-open" className="text-emerald-500" /><h2 className="text-xl font-black">{t('review')}</h2></div>
-                                    <button onClick={() => setView('result')} className="bg-white/10 p-2 rounded-xl text-xs font-bold transition-all hover:bg-white/20"><Icon name="x" className="w-6 h-6" /></button>
-                                </div>
-                                <div className="flex-1 overflow-y-auto p-6 md:p-10 space-y-8 bg-slate-50/50 hide-scroll text-right">
-                                    {activeQuizQuestions.map((q, idx) => {
-                                        const isCorrect = userAnswers[idx] === q.c;
-                                        return (
-                                            <div key={idx} className={`bg-white p-8 rounded-[2.5rem] border-2 transition-all ${isCorrect ? 'border-emerald-100' : 'border-red-100'} shadow-lg`}>
-                                                <div className="flex justify-between items-start mb-6 gap-4">
-                                                    <h3 className="text-xl font-black text-slate-800 text-right flex-1 leading-relaxed font-bold">{idx + 1}. {q.q}</h3>
-                                                    <div className={isCorrect ? 'text-emerald-500' : 'text-red-500'}><Icon name={isCorrect ? "check-circle-2" : "x-circle"} className="w-8 h-8" /></div>
-                                                </div>
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-                                                    {q.a.map((opt, optIdx) => (opt && (q.type === 'mcq' || optIdx < 2)) && (
-                                                        <div key={optIdx} className={`p-4 rounded-2xl border-2 flex items-center gap-3 font-bold ${optIdx === q.c ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm' : optIdx === userAnswers[idx] ? 'bg-red-500 border-red-500 text-white' : 'bg-white border-slate-100 text-slate-400 opacity-60'}`}>
-                                                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-black shrink-0 ${optIdx === q.c || optIdx === userAnswers[idx] ? 'bg-white/20' : 'bg-slate-50 text-slate-300'}`}>{q.type === 'tf' ? (optIdx === 0 ? '✓' : '✗') : MCQ_LABELS[optIdx]}</div>
-                                                            <span className="text-sm flex-1">{opt}</span>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                                <button onClick={() => explainQuestion(q, q.c, userAnswers[idx])} className="w-full bg-violet-50 text-violet-600 py-3 rounded-2xl font-black text-xs border border-violet-100 flex items-center justify-center gap-2 font-bold">
-                                                    ✨ اشرح لي لماذا
-                                                </button>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                                <div className="p-6 bg-white border-t text-center shrink-0"><button onClick={() => window.location.reload()} className="bg-slate-800 text-white px-12 py-4 rounded-2xl font-black shadow-xl font-bold transition-all active:scale-95">إنهاء المراجعة</button></div>
-                            </div>
-                        </div>
-                    )}
-
-                    {view === 'dashboard' && isTeacher && (
-                        <div className="max-w-7xl mx-auto p-4 md:p-8 animate-in pb-20">
-                            <div className="bg-white rounded-[3rem] shadow-2xl overflow-hidden border flex flex-col min-h-[85vh]">
-                                <div className="bg-slate-900 p-6 text-white flex flex-col md:flex-row justify-between items-center gap-6 shrink-0">
-                                    <div className="flex items-center gap-4 text-right">
-                                        {/* FIXED DASHBOARD ICON */}
-                                        <div className="w-14 h-14 bg-emerald-500 rounded-3xl flex items-center justify-center shadow-xl shadow-emerald-500/20">
-                                            <Icon name="settings" className="w-7 h-7 text-white" />
-                                        </div>
-                                        <div><h1 className="text-2xl font-black">{t('dashboard')}</h1><p className="text-xs text-slate-400 font-bold uppercase tracking-widest font-bold">{teacherData?.username}</p></div>
-                                    </div>
-                                    <div className="flex bg-slate-800 p-1.5 rounded-[1.5rem]">
-                                        <button onClick={() => setDashTab('results')} className={`px-8 py-3 rounded-2xl font-black text-sm transition-all font-bold ${dashTab === 'results' ? 'bg-white text-slate-900 shadow-xl' : 'text-slate-400 hover:text-white'}`}>{t('results')}</button>
-                                        <button onClick={() => setDashTab('manage_questions')} className={`px-8 py-3 rounded-2xl font-black text-sm transition-all font-bold ${dashTab === 'manage_questions' ? 'bg-white text-slate-900 shadow-xl' : 'text-slate-400 hover:text-white'}`}>{t('questions')}</button>
-                                    </div>
-                                    <button onClick={() => window.location.reload()} className="text-red-400 font-black flex items-center gap-2 hover:bg-red-400/10 px-4 py-2 rounded-xl transition-all font-bold"><Icon name="log-out" className="w-4 h-4" /> {t('logout')}</button>
-                                </div>
-
-                                <div className="flex-1 p-6 md:p-10 bg-slate-50/30 overflow-y-auto text-right">
-                                    {dashTab === 'results' ? (
-                                        <div className="space-y-8 animate-in">
-                                            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                                                <div className="flex items-center gap-4">
-                                                    <h2 className="text-3xl font-black text-slate-800 font-bold">{t('results')}</h2>
-                                                    <button onClick={exportToExcel} className="bg-emerald-100 text-emerald-700 px-4 py-2.5 rounded-2xl text-xs font-black flex items-center gap-2 hover:bg-emerald-200 transition-all shadow-sm font-bold">
-                                                        <Icon name="download" className="w-4 h-4" /> {t('exportExcel')}
-                                                    </button>
-                                                </div>
-                                                <div className="flex flex-wrap items-center gap-3">
-                                                    {/* SORT SELECTOR - SYMMETRICAL WIDTH */}
-                                                    <div className="flex items-center bg-white border rounded-2xl shadow-sm relative pr-2 w-48">
-                                                        <div className="pointer-events-none px-2 text-slate-400 shrink-0">
-                                                            <Icon name="sort" className="w-4 h-4" />
-                                                        </div>
-                                                        <select 
-                                                            className="bg-transparent border-none py-3 pr-2 pl-8 font-bold text-xs text-slate-600 outline-none appearance-none flex-1 text-right" 
-                                                            value={resultSort} 
-                                                            onChange={e => setResultSort(e.target.value)}
-                                                        >
-                                                            <option value="timestamp_desc">الأحدث أولاً</option>
-                                                            <option value="timestamp_asc">الأقدم أولاً</option>
-                                                            <option value="score_desc">الأعلى درجة</option>
-                                                            <option value="score_asc">الأقل درجة</option>
-                                                            <option value="student_name_asc">الاسم (أ-ي)</option>
-                                                            <option value="student_name_desc">الاسم (ي-أ)</option>
-                                                        </select>
-                                                        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-300">
-                                                            <Icon name="chevron-down" className="w-3 h-3" />
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    {/* SUBJECT SELECTOR - SYMMETRICAL WIDTH */}
-                                                    <div className="relative w-48">
-                                                        <select 
-                                                            className="w-full bg-white border p-3 rounded-2xl font-bold text-xs text-slate-600 shadow-sm outline-none appearance-none text-right" 
-                                                            value={resultFilterSubject} 
-                                                            onChange={e => setResultFilterSubject(e.target.value)}
-                                                        >
-                                                            <option value="الكل">كل المواد</option>
-                                                            {SUBJECT_LIST.map(s => <option key={s} value={s}>{s}</option>)}
-                                                        </select>
-                                                        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-300">
-                                                            <Icon name="chevron-down" className="w-3 h-3" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="bg-white rounded-[2.5rem] border shadow-xl overflow-hidden overflow-x-auto">
-                                                <table className="w-full text-center border-collapse">
-                                                    <thead className="bg-slate-100 text-[12px] font-black text-slate-500 border-b">
-                                                        <tr><th className="p-6">{t('student')}</th><th className="p-6">{t('subject')}</th><th className="p-6">{t('class')}</th><th className="p-6">{t('score')}</th><th className="p-6">الإجراءات</th></tr>
-                                                    </thead>
-                                                    <tbody className="divide-y divide-slate-50 font-bold text-slate-600">
-                                                        {filteredResults.map(res => (
-                                                            <tr key={res.id} className="hover:bg-slate-50 transition-all group">
-                                                                <td className="p-6">
-                                                                    <div className="font-bold">{res.student_name}</div>
-                                                                    <div className="text-[10px] text-slate-400 font-normal">
-                                                                        {res.timestamp ? new Date(res.timestamp.seconds * 1000).toLocaleString('ar-EG') : '-'}
-                                                                    </div>
-                                                                </td>
-                                                                <td className="p-6"><span className="bg-indigo-50 text-indigo-600 px-4 py-1.5 rounded-xl text-xs font-bold">{res.subject}</span></td>
-                                                                <td className="p-6 font-bold">{res.student_class}</td>
-                                                                <td className="p-6 font-black text-xl text-emerald-600 font-bold">{res.score} / {res.total}</td>
-                                                                <td className="p-6">
-                                                                    <div className="flex items-center justify-center gap-2">
-                                                                        <button onClick={() => setTeacherReview({ show: true, resultData: res })} className="bg-indigo-50 text-indigo-600 p-2 rounded-xl transition-all hover:bg-indigo-600 hover:text-white" title="مراجعة الإجابات">
-                                                                            <Icon name="eye" className="w-5 h-5" />
-                                                                        </button>
-                                                                        <button onClick={() => deleteSingleResult(res.id)} className="bg-red-50 text-red-400 p-2 rounded-xl transition-all hover:bg-red-500 hover:text-white" title="حذف النتيجة">
-                                                                            <Icon name="trash-2" className="w-5 h-5" />
-                                                                        </button>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        ))}
-                                                        {filteredResults.length === 0 && (
-                                                            <tr><td colSpan="5" className="p-20 text-slate-300 font-bold text-center italic">لا توجد نتائج مطابقة للبحث</td></tr>
-                                                        )}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        <div className="space-y-6">
-                                            <div className="flex gap-4 border-b pb-4 shrink-0">
-                                                <button onClick={() => setQSubTab('bank')} className={`px-6 py-2 rounded-xl font-black text-sm flex items-center gap-2 font-bold ${qSubTab === 'bank' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-400'}`}><Icon name="database" className="w-4 h-4" /> {t('bank')}</button>
-                                                <button onClick={() => setQSubTab('add')} className={`px-6 py-2 rounded-xl font-black text-sm flex items-center gap-2 font-bold ${qSubTab === 'add' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-400'}`}><Icon name="file-plus-2" className="w-4 h-4" /> {t('add')}</button>
-                                            </div>
-
-                                            {qSubTab === 'bank' ? (
-                                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                                    <div className="md:col-span-1 space-y-4 overflow-y-auto max-h-[70vh] hide-scroll">
-                                                        {Object.keys(groupedQuestions).length > 0 ? Object.keys(groupedQuestions).map((fName, idx) => (
-                                                            <button key={idx} onClick={() => {
-                                                                setExpandedFile(expandedFile === fName ? null : fName);
-                                                                const qs = groupedQuestions[fName];
-                                                                if(qs && qs.length > 0) setScheduleData({ visible: qs[0].visible !== false, releaseDate: qs[0].releaseDate || '', expiryDate: qs[0].expiryDate || '', isRandom: qs[0].isRandom || false });
-                                                            }} className={`w-full p-5 rounded-[1.5rem] flex justify-between items-center border-2 transition-all ${expandedFile === fName ? 'bg-emerald-50 border-emerald-500 shadow-md' : 'bg-white border-slate-100'}`}>
-                                                                <div className="flex items-center gap-3 text-right">
-                                                                    <Icon name="file-text" className={expandedFile === fName ? 'text-emerald-600' : 'text-slate-300'} />
-                                                                    <div><h4 className="font-black text-sm text-slate-700 font-bold">{fName} {groupedQuestions[fName][0]?.examClass && <span className="text-[10px] text-indigo-500">(فصل {groupedQuestions[fName][0]?.examClass})</span>}</h4><p className="text-[10px] text-slate-400 font-bold">{(groupedQuestions[fName] || []).length} سؤال</p></div>
-                                                                </div>
-                                                                <div className="flex items-center gap-2">
-                                                                    <button onClick={(e) => { e.stopPropagation(); const fClass = groupedQuestions[fName][0]?.examClass || '7'; setRenameModal({ show: true, oldName: fName, newName: fName, oldClass: fClass, newClass: fClass }); }} className="p-2 text-indigo-400 hover:text-indigo-600 transition-colors" title={t('renameFile')}><Icon name="edit-3" className="w-4 h-4" /></button>
-                                                                    <button onClick={(e) => { e.stopPropagation(); duplicateFileBank(fName); }} className="p-2 text-emerald-400 hover:text-emerald-600 transition-colors" title={t('duplicateFile')}><Icon name="copy" className="w-4 h-4" /></button>
-                                                                    <Icon name={expandedFile === fName ? "chevron-up" : "chevron-down"} className="w-4 h-4" />
-                                                                </div>
-                                                            </button>
-                                                        )) : <div className="p-10 text-center text-slate-300 font-bold">لا توجد ملفات في بنك الأسئلة</div>}
-                                                    </div>
-                                                    <div className="md:col-span-2 space-y-6">
-                                                        {expandedFile ? (
-                                                            <div className="space-y-6 animate-in">
-                                                                <div className="bg-white p-8 rounded-[2.5rem] border-2 border-indigo-100 shadow-xl space-y-6 text-right">
-                                                                    <div className="flex justify-between items-center border-b pb-4">
-                                                                        <h3 className="text-xl font-black text-slate-800">{expandedFile}</h3>
-                                                                        <button onClick={() => prepareAddMoreQs(expandedFile)} className="bg-emerald-600 text-white px-4 py-2 rounded-xl text-xs font-black shadow-lg hover:bg-emerald-700 active:scale-95 transition-all flex items-center justify-center gap-2 font-bold"><Icon name="plus" className="w-3 h-3" /> {t('addMoreQs')}</button>
-                                                                    </div>
-                                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                                                        <div className="space-y-4">
-                                                                            <h3 className="text-md font-black flex items-center gap-2 text-indigo-600 font-bold"><Icon name="calendar" className="w-5 h-5" /> {t('schedule')}</h3>
-                                                                            <div className="grid grid-cols-1 gap-3">
-                                                                                <button onClick={() => setScheduleData({...scheduleData, visible: !scheduleData.visible})} className={`p-4 rounded-2xl font-black border-2 transition-all flex items-center justify-center gap-2 font-bold ${scheduleData.visible ? 'bg-emerald-50 border-emerald-500 text-emerald-700' : 'bg-red-50 border-red-500 text-red-700'}`}>{scheduleData.visible ? <Icon name="eye" className="w-4 h-4" /> : <Icon name="eye-off" className="w-4 h-4" />} {scheduleData.visible ? t('visible') : t('hidden')}</button>
-                                                                                <div className="space-y-1"><label className="text-[10px] font-black text-slate-400 px-2 uppercase tracking-widest">تاريخ الإصدار</label><input type="datetime-local" className="w-full p-4 bg-slate-50 border-2 rounded-2xl font-black" value={scheduleData.releaseDate} onChange={(e) => setScheduleData({...scheduleData, releaseDate: e.target.value})} /></div>
-                                                                                <div className="space-y-1"><label className="text-[10px] font-black text-slate-400 px-2 uppercase tracking-widest">تاريخ الانتهاء</label><input type="datetime-local" className="w-full p-4 bg-slate-50 border-2 rounded-2xl font-black" value={scheduleData.expiryDate} onChange={(e) => setScheduleData({...scheduleData, expiryDate: e.target.value})} /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="space-y-4">
-                                                                            <h3 className="text-md font-black flex items-center gap-2 text-violet-600 font-bold"><Icon name="settings" className="w-5 h-5" /> إعدادات الاختبار</h3>
-                                                                            <div className="flex flex-col gap-3">
-                                                                                <button onClick={() => setScheduleData({...scheduleData, isRandom: !scheduleData.isRandom})} className={`p-6 rounded-2xl font-black border-2 transition-all flex items-center justify-center gap-3 font-bold ${scheduleData.isRandom ? 'bg-violet-50 border-violet-500 text-violet-700' : 'bg-slate-50 border-slate-200 text-slate-400'}`}><Icon name="shuffle" className="w-5 h-5" /><span>{t('randomize')}: {scheduleData.isRandom ? 'مفعل' : 'معطل'}</span></button>
-                                                                                <p className="text-[10px] text-slate-400 px-2 font-bold leading-relaxed">عند تفعيل الترتيب العشوائي، ستظهر الأسئلة لكل طالب بترتيب مختلف.</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="flex gap-4 border-t pt-6 justify-center">
-                                                                        <button onClick={() => saveScheduleSettings(expandedFile)} className="flex-1 bg-indigo-600 text-white py-4 px-6 rounded-2xl font-black shadow-lg transition-all active:scale-95 flex items-center justify-center gap-3 font-bold"><Icon name="save" className="w-5 h-5" /> <span>{t('save')}</span></button>
-                                                                        <button onClick={() => deleteFileBank(expandedFile)} className="bg-red-500 text-white p-4 rounded-2xl font-black shadow-lg transition-all active:scale-95 flex items-center justify-center font-bold"><Icon name="trash-2" className="w-5 h-5" /></button>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="bg-white rounded-[2.5rem] border shadow-xl overflow-hidden text-right">
-                                                                    <div className="bg-slate-900 p-6 text-white flex justify-between items-center"><h3 className="text-xl font-black">{expandedFile}</h3><p className="text-xs text-emerald-400 font-bold">المادة: {(groupedQuestions[expandedFile] || [])[0]?.subject} | الفصل: {(groupedQuestions[expandedFile] || [])[0]?.examClass || 'غير محدد'}</p></div>
-                                                                    <div className="p-6 space-y-4 max-h-[50vh] overflow-y-auto hide-scroll text-right">
-                                                                        {(groupedQuestions[expandedFile] || []).map((q, i) => (
-                                                                            <div key={i} className="p-5 bg-slate-50 rounded-2xl border flex flex-col gap-4 shadow-sm group hover:border-indigo-100 transition-all">
-                                                                                <div className="flex justify-between items-start gap-4">
-                                                                                    <h4 className="font-black text-slate-800 text-right flex-1 leading-relaxed">{i+1}. {q.q} <span className="text-[10px] text-indigo-400 bg-indigo-50 px-2 py-0.5 rounded-lg mr-2 font-bold">({q.p || 0} {t('points')})</span></h4>
-                                                                                    <div className="flex gap-1"><button onClick={() => setEditModal({ show: true, data: JSON.parse(JSON.stringify(q)), isLocal: false })} className="p-2 text-slate-300 hover:text-indigo-500 transition-all"><Icon name="edit-3" className="w-5 h-5" /></button><button onClick={() => deleteSingleQuestion(q.id)} className="p-2 text-slate-300 hover:text-red-500 transition-all"><Icon name="trash-2" className="w-5 h-5" /></button></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        ))}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        ) : <div className="h-full flex items-center justify-center p-20 text-slate-300 font-black text-xl border-2 border-dashed rounded-[3rem] font-bold">يرجى اختيار ملف من القائمة لعرضه</div>}
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                                                    <div className="lg:col-span-2 bg-white p-8 rounded-[3rem] border shadow-xl space-y-6 overflow-y-auto max-h-[85vh] hide-scroll text-right">
-                                                        <div className="flex justify-between items-center"><h3 className="text-xl font-black">{t('add')}</h3><button onClick={() => setShowImport(true)} className="bg-indigo-50 text-indigo-600 px-4 py-2 rounded-xl text-xs font-black flex items-center gap-2 hover:bg-indigo-100 transition-all font-bold"><Icon name="upload-cloud" className="w-4 h-4" /> {t('import')}</button></div>
-                                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                                            <div className="md:col-span-1 space-y-1"><label className="text-[10px] font-black text-slate-400 px-2">اسم ملف الاختبار</label><input type="text" placeholder={t('examFile')} className="w-full p-4 bg-slate-50 border-2 rounded-2xl font-black text-center outline-none focus:border-emerald-500 shadow-sm" value={fileName} onChange={e => setFileName(e.target.value)} /></div>
-                                                            <div className="md:col-span-1 space-y-1"><label className="text-[10px] font-black text-slate-400 px-2">المادة</label><select className="w-full p-4 bg-slate-50 border-2 rounded-2xl font-black text-right outline-none" value={student.subject} onChange={e => setStudent({...student, subject: e.target.value})}>{SUBJECT_LIST.map(s => <option key={s} value={s}>{s}</option>)}</select></div>
-                                                            <div className="md:col-span-1 space-y-1"><label className="text-[10px] font-black text-slate-400 px-2">الفصل الدراسي</label><select className="w-full p-4 bg-slate-50 border-2 rounded-2xl font-black text-center outline-none" value={examClass} onChange={e => setExamClass(e.target.value)}><option value="7">7</option><option value="8">8</option><option value="9">9</option></select></div>
-                                                        </div>
-                                                        <div className="bg-violet-50 p-6 rounded-[2.5rem] border border-violet-100 space-y-4">
-                                                            <div className="flex items-center gap-2 text-violet-600 font-black mb-2"><Icon name="sparkles" className="w-5 h-5" /><span>الأوامر الذكية (AI)</span></div>
-                                                            <textarea placeholder="مثال: اكتب 3 أسئلة خيار من متعدد حول موضوع الصلاة..." className="w-full p-4 bg-white border-2 border-violet-200 rounded-2xl text-sm outline-none focus:border-violet-500 min-h-[100px] font-bold" value={aiCommand} onChange={e => setAiCommand(e.target.value)} />
-                                                            <button onClick={generateAiQuestions} className="w-full gemini-loading text-white py-4 rounded-2xl font-black shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-50" disabled={aiLoading}>{aiLoading ? "جاري التوليد..." : "توليد الأسئلة بذكاء"}</button>
-                                                        </div>
-                                                        <div className="grid grid-cols-2 gap-4">
-                                                            <div className="flex items-center bg-slate-50 border-2 rounded-2xl p-4 gap-3"><Icon name="clock" className="text-emerald-500 w-5 h-5" /><span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('duration')}</span><input type="number" className="bg-transparent w-full text-right font-black outline-none" value={examDuration} onChange={e => setExamDuration(e.target.value)} /></div>
-                                                            <div className="flex items-center bg-slate-50 border-2 rounded-2xl p-4 gap-3"><Icon name="star" className="text-indigo-500 w-5 h-5" /><span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('points')}</span><input type="number" className="bg-transparent w-full text-right font-black outline-none" value={newQ.p} onChange={e => setNewQ({...newQ, p: Number(e.target.value)})} /></div>
-                                                        </div>
-                                                        <div className="space-y-4 pt-4 border-t text-right">
-                                                            <div className="flex justify-start"><div className="flex bg-slate-100 p-1 rounded-xl w-auto"><button onClick={() => setNewQ({...newQ, type: 'mcq', a: ['', ''], c: 0})} className={`px-4 py-2 rounded-lg font-black text-xs transition-all ${newQ.type === 'mcq' ? 'bg-white shadow-md text-emerald-600' : 'text-slate-400'}`}>{t('mcq')}</button><button onClick={() => setNewQ({...newQ, type: 'tf', a: ['صح', 'خطأ'], c: 0})} className={`px-4 py-2 rounded-lg font-black text-xs transition-all ${newQ.type === 'tf' ? 'bg-white shadow-md text-emerald-600' : 'text-slate-400'}`}>{t('tf')}</button></div></div>
-                                                            <textarea placeholder={t('qPlaceholder')} className="w-full p-5 bg-slate-50 border rounded-2xl font-black h-24 text-right outline-none focus:border-emerald-500 shadow-inner" value={newQ.q} onChange={e => setNewQ({...newQ, q: e.target.value})} />
-                                                            <div className="space-y-3">
-                                                                {newQ.a.map((opt, i) => (<div key={i} className={`flex items-center gap-2 p-3 border-2 rounded-xl transition-all ${newQ.c === i ? 'border-emerald-500 bg-emerald-50 shadow-sm' : 'border-slate-100 bg-white'}`}><span className="font-black text-slate-400 shrink-0 w-6 text-center">{MCQ_LABELS[i]}</span><input type="text" placeholder={`خيار ${i+1}`} className="flex-1 bg-transparent text-sm font-bold text-right outline-none" value={opt} onChange={e => { const na = [...newQ.a]; na[i] = e.target.value; setNewQ({...newQ, a: na}); }} /><div className="flex gap-2 shrink-0"><input type="radio" checked={newQ.c === i} onChange={() => setNewQ({...newQ, c: i})} className="w-5 h-5 accent-emerald-500" />{newQ.type === 'mcq' && newQ.a.length > 2 && (<button onClick={() => { const na = newQ.a.filter((_, idx) => idx !== i); setNewQ({...newQ, a: na, c: 0}); }} className="text-red-300 hover:text-red-500 transition-colors"><Icon name="minus-circle" className="w-4 h-4" /></button>)}</div></div>))}
-                                                                {newQ.type === 'mcq' && newQ.a.length < 4 && (<button onClick={() => setNewQ({...newQ, a: [...newQ.a, '']})} className="w-full py-2 border-2 border-dashed border-slate-200 rounded-xl text-slate-400 text-xs font-black flex items-center justify-center gap-2 hover:bg-slate-50 transition-all font-bold font-bold"><Icon name="plus-circle" className="w-4 h-4" /> إضافة خيار آخر</button>)}
-                                                            </div>
-                                                            <button onClick={addToLocal} className="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black shadow-lg hover:bg-emerald-700 transition-all active:scale-95 flex items-center justify-center gap-3 font-bold"><Icon name="plus" className="w-5 h-5" /> <span>{t('add')}</span></button>
-                                                        </div>
-                                                    </div>
-                                                    <div className="lg:col-span-2 space-y-4">
-                                                        <div className="bg-indigo-600 p-6 rounded-[2.5rem] text-white flex justify-between items-center shadow-lg text-right"><div><h3 className="text-xl font-black">{t('previewTitle')}</h3><p className="text-xs opacity-70">إجمالي: {localQuestions.length} سؤال لطلاب الفصل {examClass}</p></div></div>
-                                                        <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-2 hide-scroll pb-20 text-right">
-                                                            {localQuestions.map((q, i) => (
-                                                                <div key={i} className="p-6 bg-white border rounded-[2rem] shadow-sm flex flex-col gap-4 group transition-all hover:border-indigo-100">
-                                                                    <div className="flex justify-between items-start gap-4"><div className="flex-1"><h4 className="font-black text-slate-800 leading-relaxed font-bold">{i+1}. {q.q} <span className="text-[10px] text-indigo-400 bg-indigo-50 px-2 py-0.5 rounded-lg mr-2 font-bold font-bold">({q.p || 0} {t('points')})</span></h4></div><div className="flex gap-1"><button onClick={() => setEditModal({ show: true, data: JSON.parse(JSON.stringify(q)), isLocal: true })} className="text-slate-300 hover:text-indigo-500 p-2 transition-colors"><Icon name="edit-3" className="w-5 h-5" /></button><button onClick={() => setLocalQuestions(localQuestions.filter(x => x.id !== q.id))} className="text-slate-300 hover:text-red-500 p-2 transition-colors"><Icon name="trash-2" className="w-5 h-5" /></button></div></div>
-                                                                    <div className="grid grid-cols-2 gap-2 mt-2">{q.a.map((opt, optIdx) => (opt !== undefined && (q.type === 'mcq' || optIdx < 2)) && (<div key={optIdx} className={`px-4 py-2 rounded-xl text-xs flex items-center gap-2 ${optIdx === q.c ? 'bg-emerald-50 text-emerald-700 font-black border border-emerald-100' : 'bg-slate-50 text-slate-400 border border-slate-100'}`}><span className="shrink-0">{q.type === 'tf' ? (optIdx === 0 ? '✓' : '✗') : MCQ_LABELS[optIdx]}:</span><span className="truncate">{opt}</span>{optIdx === q.c && <Icon name="check" className="w-3 h-3 text-emerald-500" />}</div>))}</div>
-                                                                </div>
-                                                            ))}
-                                                            {localQuestions.length === 0 && <div className="text-center p-20 text-slate-300 border-2 border-dashed rounded-[3rem] font-bold">لم تقم بإضافة أسئلة بعد</div>}
-                                                        </div>
-                                                        {localQuestions.length > 0 && <button onClick={saveQuestionsToDB} className="w-full bg-indigo-600 text-white py-6 rounded-[2rem] font-black text-xl shadow-2xl flex items-center justify-center gap-4 hover:bg-indigo-700 transition-all active:scale-95 font-bold"><Icon name="save" className="w-6 h-6" /> <span>{t('saveBank')} ({localQuestions.length})</span></button>}
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* RENAME MODAL */}
-                    {renameModal.show && (
-                        <div className="fixed inset-0 modal-overlay z-[700] flex items-center justify-center p-4">
-                            <div className="bg-white rounded-[2.5rem] max-w-sm w-full shadow-2xl p-8 text-right animate-in border-t-8 border-indigo-500 font-bold">
-                                <h3 className="text-xl font-black mb-6 flex items-center gap-3 text-indigo-600 font-bold"><Icon name="edit-3" className="w-6 h-6" /> {t('renameFile')}</h3>
-                                <div className="space-y-5">
-                                    <div className="space-y-1"><label className="text-[11px] font-black text-slate-400 px-2 uppercase tracking-widest font-bold">الاسم الجديد</label><input type="text" className="w-full p-4 bg-slate-50 border-2 rounded-2xl font-black text-center outline-none focus:border-indigo-500 shadow-sm" value={renameModal.newName} onChange={e => setRenameModal({...renameModal, newName: e.target.value})} /></div>
-                                    <div className="space-y-1"><label className="text-[11px] font-black text-slate-400 px-2 uppercase tracking-widest font-bold">الفصل الدراسي</label><select className="w-full p-4 bg-slate-50 border-2 rounded-2xl font-black text-center outline-none focus:border-indigo-500" value={renameModal.newClass} onChange={e => setRenameModal({...renameModal, newClass: e.target.value})}><option value="7">7</option><option value="8">8</option><option value="9">9</option></select></div>
-                                </div>
-                                <div className="flex gap-4 mt-10">
-                                    <button onClick={renameFileBank} className="flex-1 bg-indigo-600 text-white py-4 rounded-2xl font-black shadow-lg hover:bg-indigo-700 transition-all active:scale-95 flex items-center justify-center gap-3 font-bold"><Icon name="check" className="w-5 h-5" /> <span>تحديث</span></button>
-                                    <button onClick={() => setRenameModal({ show: false, oldName: '', newName: '', oldClass: '', newClass: '' })} className="px-6 bg-slate-100 text-slate-500 py-4 rounded-2xl font-black font-bold">إلغاء</button>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* EDIT MODAL */}
-                    {editModal.show && editModal.data && (
-                        <div className="fixed inset-0 modal-overlay z-[600] flex items-center justify-center p-4">
-                            <div className="bg-white rounded-[2.5rem] max-w-2xl w-full shadow-2xl overflow-hidden flex flex-col text-right max-h-[85vh] font-bold">
-                                <div className="bg-slate-900 p-6 text-white flex justify-between items-center shrink-0"><h3 className="font-bold flex items-center gap-2 text-lg font-bold"><Icon name="edit-3" className="w-6 h-6" /> {editModal.isLocal ? 'تعديل السؤال (قبل الحفظ)' : 'تعديل السؤال في البنك'}</h3><button onClick={() => setEditModal({ show: false, data: null, isLocal: false })} className="p-2 hover:bg-white/10 rounded-xl transition-colors"><Icon name="x" className="w-6 h-6" /></button></div>
-                                <div className="p-8 space-y-6 overflow-y-auto hide-scroll flex-1">
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div className="space-y-1"><label className="text-[11px] font-black text-slate-400 px-2 uppercase tracking-widest font-bold">نوع السؤال</label><div className="flex bg-slate-100 p-1 rounded-xl"><button onClick={() => setEditModal({...editModal, data: {...editModal.data, type: 'mcq'}})} className={`flex-1 py-2 rounded-lg font-black text-xs transition-all ${editModal.data.type === 'mcq' ? 'bg-white shadow text-emerald-600' : 'text-slate-400'}`}>{t('mcq')}</button><button onClick={() => setEditModal({...editModal, data: {...editModal.data, type: 'tf', a: ['صح', 'خطأ'], c: 0}})} className={`flex-1 py-2 rounded-lg font-black text-xs transition-all ${editModal.data.type === 'tf' ? 'bg-white shadow text-emerald-600' : 'text-slate-400'}`}>{t('tf')}</button></div></div>
-                                        <div className="space-y-1"><label className="text-[11px] font-black text-slate-400 px-2 uppercase tracking-widest font-bold">{t('points')}</label><input type="number" className="w-full p-3 bg-slate-50 border-2 rounded-2xl font-bold text-center outline-none focus:border-indigo-500 font-bold" value={editModal.data.p} onChange={e => setEditModal({...editModal, data: {...editModal.data, p: Number(e.target.value)}})} /></div>
-                                    </div>
-                                    <div className="space-y-2"><label className="text-[11px] font-black text-slate-400 px-2 uppercase tracking-widest font-bold">نص السؤال</label><textarea className="w-full p-5 bg-slate-50 border-2 rounded-2xl font-bold text-right outline-none focus:border-indigo-500 shadow-sm transition-all" value={editModal.data.q} onChange={e => setEditModal({...editModal, data: {...editModal.data, q: e.target.value}})} /></div>
-                                    <div className="space-y-4 pb-4">
-                                        <label className="text-[11px] font-black text-slate-400 px-2 uppercase tracking-widest font-bold">خيارات الإجابة</label>
-                                        <div className="space-y-3 text-right">{editModal.data.a.map((opt, i) => (opt !== undefined && (editModal.data.type === 'mcq' || i < 2)) && (<div key={i} className={`flex items-center gap-3 p-4 rounded-2xl border-2 transition-all ${editModal.data.c === i ? 'border-emerald-500 bg-emerald-50 shadow-sm' : 'border-slate-100 bg-white'}`}><span className="font-black text-slate-400 shrink-0 w-8 text-center text-lg">{editModal.data.type === 'tf' ? (i === 0 ? '✓' : '✗') : MCQ_LABELS[i]}</span><input type="text" className="flex-1 bg-transparent font-bold text-right outline-none text-base" value={opt} onChange={e => { const na = [...editModal.data.a]; na[i] = e.target.value; setEditModal({...editModal, data: {...editModal.data, a: na}}); }} /><div className="flex gap-3 shrink-0 items-center"><input type="radio" name="edit_choice_radio" checked={editModal.data.c === i} onChange={() => setEditModal({...editModal, data: {...editModal.data, c: i}})} className="w-6 h-6 accent-emerald-500 cursor-pointer" />{editModal.data.type === 'mcq' && editModal.data.a.length > 2 && (<button onClick={() => { const na = editModal.data.a.filter((_, idx) => idx !== i); setEditModal({...editModal, data: {...editModal.data, a: na, c: 0}}); }} className="text-red-300 hover:text-red-500 transition-colors"><Icon name="minus-circle" className="w-4 h-4" /></button>)}</div></div>))}
-                                        {editModal.data.type === 'mcq' && editModal.data.a.length < 4 && (<button type="button" onClick={() => setEditModal({...editModal, data: {...editModal.data, a: [...editModal.data.a, '']}})} className="w-full py-4 border-2 border-dashed border-slate-200 rounded-3xl text-slate-400 text-sm font-black flex items-center justify-center gap-2 hover:bg-slate-50 hover:border-indigo-200 hover:text-indigo-400 transition-all mt-2 mb-4 font-bold font-bold font-bold"><Icon name="plus-circle" className="w-5 h-5" /> إضافة خيار آخر (ج، د)</button>)}</div>
-                                    </div>
-                                </div>
-                                <div className="p-8 bg-white border-t shrink-0"><button onClick={saveEditedQuestion} className="w-full bg-emerald-600 text-white py-5 rounded-3xl font-black shadow-lg hover:bg-emerald-700 transition-all active:scale-95 text-lg font-bold flex items-center justify-center gap-3 font-bold"><span>{t('save')}</span><Icon name="save" className="w-6 h-6" /></button></div>
-                            </div>
-                        </div>
-                    )}
-
-                    {teacherAuthUI.show && (
-                        <div className="fixed inset-0 modal-overlay z-[500] flex items-center justify-center p-4">
-                            <div className="bg-white p-8 rounded-[2.5rem] max-w-sm w-full shadow-2xl animate-in text-right font-bold">
-                                <h2 className="text-2xl font-black text-center mb-6">{teacherAuthUI.isRegistering ? t('register') : t('login')}</h2>
-                                <div className="space-y-4"><input type="text" placeholder={t('username')} className="w-full p-4 bg-slate-50 border-2 rounded-2xl font-bold text-center outline-none focus:border-emerald-500 transition-all" value={teacherAuthUI.username} onChange={e => setTeacherAuthUI({...teacherAuthUI, username: e.target.value})} /><input type="password" placeholder={t('password')} className="w-full p-4 bg-slate-50 border-2 rounded-2xl font-bold text-center outline-none focus:border-emerald-500 transition-all" value={teacherAuthUI.password} onChange={e => setTeacherAuthUI({...teacherAuthUI, password: e.target.value})} /></div>
-                                <button onClick={handleTeacherAuth} className="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black mt-6 shadow-lg hover:bg-emerald-700 transition-all active:scale-95">{teacherAuthUI.isRegistering ? t('register') : t('login')}</button>
-                                <button onClick={() => setTeacherAuthUI(p => ({ ...p, isRegistering: !p.isRegistering }))} className="w-full text-emerald-600 text-xs font-bold mt-4 text-center block hover:underline">{teacherAuthUI.isRegistering ? 'لديك حساب بالفعل؟ سجل دخول' : 'ليس لديك حساب؟ سجل كمعلم جديد'}</button>
-                                <button onClick={() => setTeacherAuthUI(p => ({ ...p, show: false }))} className="w-full text-slate-400 font-bold mt-2 text-xs text-center block">{t('cancel')}</button>
-                            </div>
-                        </div>
-                    )}
-
-                    {showImport && (
-                        <div className="fixed inset-0 modal-overlay z-[600] flex items-center justify-center p-4">
-                            <div className="bg-white p-10 rounded-[4rem] max-w-2xl w-full shadow-2xl animate-in text-right font-bold border-t-8 border-indigo-500 font-bold">
-                                <h3 className="text-3xl font-black mb-6 flex items-center gap-3 text-indigo-600"><Icon name="upload-cloud" className="w-8 h-8" /> {t('import')}</h3>
-                                <textarea className="w-full p-8 bg-slate-50 border-2 rounded-[2rem] h-72 font-bold text-right outline-none focus:border-indigo-500 mb-8 shadow-inner" value={importText} onChange={e => setImportText(e.target.value)} placeholder={t('importPlaceholder')}></textarea>
-                                <div className="flex gap-5"><button onClick={processImport} className="flex-1 bg-indigo-600 text-white py-5 rounded-[1.5rem] font-black shadow-xl hover:bg-indigo-700 transition-all flex items-center justify-center gap-3 font-bold font-bold"><Icon name="check" className="w-6 h-6" /> <span>استيراد</span></button><button onClick={() => setShowImport(false)} className="px-10 bg-slate-100 text-slate-500 py-5 rounded-[1.5rem] font-black font-bold">إلغاء</button></div>
-                            </div>
-                        </div>
-                    )}
-
-                </div>
-            );
+        // Inisialisasi Aplikasi
+        function initApp() {
+            renderSidebar();
+            updateUI();
         }
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+        // Render Sidebar Menu
+        function renderSidebar() {
+            const navContainer = document.getElementById('navLinks');
+            navContainer.innerHTML = '';
+            
+            sections.forEach(sec => {
+                const btn = document.createElement('button');
+                btn.className = `w-full text-right px-6 py-4 border-b border-slate-100 flex items-center justify-end gap-3 transition-colors hover:bg-emerald-50 ${sec.id === currentPage ? 'bg-emerald-50 text-emerald-700 font-bold border-r-4 border-r-emerald-500' : 'text-slate-600'}`;
+                btn.innerHTML = `
+                    <span>${sec.title}</span>
+                    <span class="text-xl">${sec.icon}</span>
+                `;
+                btn.onclick = () => {
+                    goToPage(sec.id);
+                    if (window.innerWidth < 1024) toggleSidebar(); // Close sidebar on mobile
+                };
+                navContainer.appendChild(btn);
+            });
+        }
+
+        // Start App from Landing Page
+        function startApp() {
+            const landing = document.getElementById('landingPage');
+            const main = document.getElementById('mainApp');
+            
+            landing.style.opacity = '0';
+            setTimeout(() => {
+                landing.classList.add('hidden');
+                main.classList.remove('hidden');
+                main.classList.add('fade-in');
+                initApp();
+            }, 500);
+        }
+
+        // Toggle Sidebar on Mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (sidebar.classList.contains('translate-x-full')) {
+                sidebar.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        // Navigate to specific page
+        function goToPage(index) {
+            if (index < 0 || index >= totalPages) return;
+            currentPage = index;
+            updateUI();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function prevPage() { goToPage(currentPage - 1); }
+        function nextPage() { goToPage(currentPage + 1); }
+
+        // Update UI (Pages, Buttons, Sidebar states)
+        function updateUI() {
+            // Hide all pages, show active page
+            for (let i = 0; i < totalPages; i++) {
+                const pageEl = document.getElementById(`page-${i}`);
+                if (i === currentPage) {
+                    pageEl.classList.remove('hidden');
+                    pageEl.classList.add('fade-in');
+                } else {
+                    pageEl.classList.add('hidden');
+                    pageEl.classList.remove('fade-in');
+                }
+            }
+
+            // Update bottom nav buttons
+            document.getElementById('btnPrev').disabled = currentPage === 0;
+            document.getElementById('btnNext').disabled = currentPage === totalPages - 1;
+            
+            // Update indicator
+            document.getElementById('pageIndicator').innerText = `${currentPage + 1}/${totalPages}`;
+
+            // Re-render sidebar to update active styling
+            renderSidebar();
+        }
+
     </script>
 </body>
 </html>
