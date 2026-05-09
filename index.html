@@ -47,6 +47,22 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }
+
+        /* Loading Dots Animation */
+        .typing-indicator span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #059669;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
     </style>
 </head>
 <body class="text-slate-800 antialiased selection:bg-emerald-200 selection:text-emerald-900">
@@ -69,7 +85,7 @@
                 Tata Cara Haji Nabi ﷺ Secara Lengkap
             </p>
             <div class="latin-text text-sm md:text-base text-emerald-200/80 font-light mt-4 max-w-lg mx-auto leading-relaxed">
-                "Berdasarkan riwayat Muslim, mencakup hukum-hukum haji yang paling agung. Dilengkapi dengan teks Arab asli dan terjemahan Bahasa Indonesia."
+                "Berdasarkan riwayat Muslim, mencakup hukum-hukum haji yang paling agung. Dilengkapi مع مساعد الذكاء الاصطناعي ✨ dan terjemahan Bahasa Indonesia."
             </div>
             
             <button onclick="startApp()" class="mt-12 latin-text group relative inline-flex items-center justify-center px-8 py-4 font-bold text-emerald-900 bg-amber-400 rounded-full overflow-hidden shadow-lg shadow-amber-500/30 hover:scale-105 transition-all duration-300">
@@ -84,7 +100,7 @@
     <!-- ========================================== -->
     <!-- 2. APLIKASI UTAMA (Materi & Sidebar)       -->
     <!-- ========================================== -->
-    <div id="mainApp" class="hidden min-h-screen flex bg-slate-50">
+    <div id="mainApp" class="hidden min-h-[100dvh] flex bg-slate-50 relative">
         
         <!-- Overlay untuk Sidebar di Mobile -->
         <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-slate-900/50 z-40 hidden transition-opacity lg:hidden"></div>
@@ -105,7 +121,7 @@
         </aside>
 
         <!-- Area Konten Utama -->
-        <main class="flex-1 lg:mr-72 flex flex-col min-h-screen relative w-full">
+        <main class="flex-1 lg:mr-72 flex flex-col min-h-[100dvh] relative w-full">
             
             <!-- Header Mobile -->
             <header class="lg:hidden sticky top-0 z-30 bg-emerald-900 text-white p-4 shadow-md flex justify-between items-center">
@@ -119,7 +135,7 @@
             </header>
 
             <!-- Wadah Halaman Konten -->
-            <div id="contentContainer" class="flex-1 p-4 md:p-8 max-w-4xl mx-auto w-full pb-32">
+            <div id="contentContainer" class="flex-1 p-4 md:p-8 max-w-4xl mx-auto w-full pb-48">
                 <!-- Halaman 0 -->
                 <div class="page-content hidden" id="page-0">
                     <div class="flex items-center gap-4 mb-8 latin-text justify-start flex-row-reverse border-b-2 border-emerald-100 pb-4">
@@ -166,7 +182,7 @@
                                 ٣- (فصلى رسول الله -صلى الله عليه وسلم- فِي اَلْمَسْجِدِ) ١، ثُمَّ رَكِبَ اَلْقَصْوَاءَ٢ حَتَّى إِذَا اِسْتَوَتْ بِهِ نَاقَتُهُ عَلَى اَلْبَيْدَاءِ٣ أهَلَّ بِالتَّوْحِيدِ: "لَبَّيْكَ٤ اَللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ اَلْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ".
                             </p>
                             <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] leading-relaxed">
-                                <strong>3.</strong> (Maka Rasulullah ﷺ shalat di masjid)¹, kemudian beliau menunggang untanya Al-Qaswa² hingga ketika unta tersebut berdiri tegak membawanya di atas Al-Baida'³, beliau berihram dengan membaca kalimat tauhid: "Labbaikallahumma labbaik, labbaika laa syarika laka labbaik. Innal hamda wanni'mata laka wal mulk, laa syarika lak" (Aku penuhi panggilan-Mu ya Allah, aku penuhi panggilan-Mu. Aku penuhi panggilan-Mu, tiada sekutu bagi-Mu, aku penuhi panggilan-Mu. Sesungguhnya pujian, nikmat, dan kerajaan hanyalah milik-Mu, tiada sekutu bagi-Mu).
+                                <strong>3.</strong> (Maka Rasulullah ﷺ shalat di masjid)¹, kemudian beliau menunggang untanya Al-Qaswa² hingga ketika unta tersebut berdiri tegak membawanya di atas Al-Baida'³, beliau berihram dengan membaca kalimat tauhid: "Labbaikallahumma labbaik, labbaika laa syarika laka labbaik. Innal hamda wanni'mata laka wal mulk, laa syarika lak" (Aku penuhi panggilan-Mu ya Allah, aku penuhi panggilan-Mu. Aku penuhi panggilan-Mu, tiada sekutu bagi-Mu, aku penuhi panggilan-Mu. Sesungguhnya pujian, nikmat, و kerajaan hanyalah milik-Mu, tiada sekutu bagi-Mu).
                             </div>
                         </div>
                         <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-amber-500">
@@ -212,7 +228,7 @@
                             </p>
                             <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
                                 <p><strong>10.</strong> Kemudian beliau menuju Maqam Ibrahim lalu membaca: "Dan jadikanlah sebagian Maqam Ibrahim tempat shalat" (QS. Al-Baqarah: 125).</p>
-                                <p><strong>11.</strong> Beliau shalat dua rakaat, menjadikan Maqam Ibrahim berada di antara beliau dan Ka'bah.</p>
+                                <p><strong>11.</strong> Beliau shalat dua rakaat, menjadikan Maqam Ibrahim berada di antara beliau و Ka'bah.</p>
                                 <p><strong>12.</strong> Dalam sebuah riwayat disebutkan: Bahwa pada dua rakaat tersebut beliau membaca Surah Al-Ikhlas (Qul huwallahu ahad) dan Surah Al-Kafirun (Qul yaa ayyuhal kaafirun).</p>
                                 <p><strong>13.</strong> Kemudian beliau kembali ke Rukun (Hajar Aswad) lalu mengusapnya kembali.</p>
                             </div>
@@ -230,7 +246,7 @@
                                 <p><strong>15.</strong> Tatkala mendekati Safa, beliau membaca: "Sesungguhnya Safa dan Marwah adalah sebahagian dari syiar Allah" (QS. Al-Baqarah: 158).</p>
                                 <p><strong>16.</strong> Beliau menaiki bukit Safa hingga dapat melihat Ka'bah.</p>
                                 <p><strong>17.</strong> Lalu beliau menghadap ke arah Kiblat.</p>
-                                <p><strong>18.</strong> Beliau mentauhidkan Allah dan mengagungkan-Nya (bertakbir), lalu mengucapkan: "Laa ilaha illallahu wahdahu laa syarika lahu, lahul mulku wa lahul hamdu, wa huwa 'alaa kulli syai-in qadiir. Laa ilaha illallahu wahdahu, anjaza wa'dahu, wa nasara 'abdahu, wa hazamal ahzaaba wahdahu" (Tiada Tuhan berhak disembah selain Allah semata, tiada sekutu bagi-Nya, milik-Nya segala kerajaan dan pujian, Dia Maha Kuasa atas segala sesuatu. Tiada Tuhan selain Allah semata, Dia telah menepati janji-Nya, menolong hamba-Nya, dan menghancurkan golongan musuh sendirian). Beliau lalu berdoa di sela-sela itu, dan mengucapkan kalimat tersebut sebanyak tiga kali.</p>
+                                <p><strong>18.</strong> Beliau mentauhidkan Allah dan mengagungkan-Nya (bertakbir), lalu mengucapkan: "Laa ilaha illallahu wahdahu laa syarika lahu, lahul mulku wa lahul hamdu, wa huwa 'alaa kulli syai-in qadiir. Laa ilaha illallahu wahdahu, anjaza wa'dahu, wa nasara 'abdahu, wa hazamal ahzaaba wahdahu" (Tiada Tuhan berhak disembah selain Allah semata, tiada sekutu bagi-Nya, milik-Nya segala kerajaan dan pujian, Dia Maha Kuasa atas segala sesuatu. Tiada Tuhan selain Allah semata, Dia telah menepati janji-Nya, menolong hamba-Nya, dan menghancurkan golongan musuh sendirian). Beliau lalu berdoa di sela-sela itu, dan mengucapkan kalimat tersebut sebanyak ثلاث مرات.</p>
                             </div>
                         </div>
                         <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-emerald-500">
@@ -263,8 +279,8 @@
                                 ٢٤- فَقَامَ سُرَاقَةُ بْنُ مَالِكِ بْنِ جُعْشُمٍ، فَقَالَ: يَا رَسُولَ اَللَّهِ، أَلِعَامِنَا هَذَا، أَمْ لِأَبَدٍ؟ فَشَبَّكَ رَسُولُ اَللَّهِ -صلى الله عليه وسلم- أَصَابِعَهُ وَاحِدَةً فِي اَلْأُخْرَى، وَقَالَ: "دَخَلَتْ اَلْعُمْرَةُ فِي اَلْحَجِّ -مَرَّتَيْنِ- لَا، بَلْ لِأَبَدِ أَبَدٍ".
                             </p>
                             <div class="border-t border-slate-100 pt-4 latin-text text-slate-600 text-[15px] space-y-3 leading-relaxed">
-                                <p><strong>23.</strong> Hingga ketika berada di putaran terakhirnya di Marwah, beliau bersabda: "Seandainya aku bisa mengulang urusanku yang telah berlalu, niscaya aku tidak akan membawa hewan kurban (hadyu) dan akan kujadikan ibadah ini sebagai umrah. Oleh karena itu, barangsiapa di antara kalian yang tidak membawa hadyu, hendaklah ia bertahalul dan menjadikannya umrah."</p>
-                                <p><strong>24.</strong> Maka Suraqah bin Malik bin Ju'syum berdiri dan bertanya: "Wahai Rasulullah, apakah (ketentuan ini) khusus untuk tahun kita ini saja, ataukah untuk selamanya?" Rasulullah ﷺ menjalin jari-jemari beliau satu sama lain sambil bersabda: "Umrah telah masuk ke dalam haji (beliau mengucapkannya dua kali). Tidak, bahkan (hukum ini berlaku) untuk selama-lamanya."</p>
+                                <p><strong>23.</strong> Hingga ketika berada di putaran terakhirnya di Marwah, beliau bersabda: "Seandainya aku bisa mengulang urusanku yang telah berlalu, niscaya aku tidak akan membawa hewan kurban (hadyu) و akan kujadikan ibadah ini sebagai umrah. Oleh karena itu, barangsiapa di antara kalian yang tidak membawa hadyu, hendaklah ia bertahalul dan menjadikannya umrah."</p>
+                                <p><strong>24.</strong> Maka Suraqah bin Malik bin Ju'syum berdiri dan bertanya: "Wahai Rasulullah, apakah (ketentuan ini) khusus untuk tahun kita ini saja, أوkah untuk selamanya?" Rasulullah ﷺ menjalin jari-jemari beliau satu sama lain sambil bersabda: "Umrah telah masuk ke dalam haji (beliau mengucapkannya dua kali). Tidak, bahkan (hukum ini berlaku) untuk selama-lamanya."</p>
                             </div>
                         </div>
                         <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-amber-500">
@@ -347,7 +363,7 @@
                                 <p><strong>35.</strong> Kemudian Bilal azan, lalu iqamah dan beliau shalat Dzuhur. Lalu Bilal iqamah (lagi) dan beliau shalat Ashar.</p>
                                 <p><strong>36.</strong> Dan beliau tidak mengerjakan shalat (sunnah) apapun di antara keduanya.</p>
                                 <p><strong>37.</strong> Kemudian beliau berkendara hingga tiba di tempat wuquf.</p>
-                                <p><strong>38.</strong> Beliau memposisikan perut untanya Al-Qaswa berdekatan dengan batu-batu besar, menjadikan tempat pejalan kaki di hadapannya, dan beliau menghadap kiblat.</p>
+                                <p><strong>38.</strong> Beliau memposisikan perut untanya Al-Qaswa berdekatan dengan batu-batu besar, menjadikan tempat pejalan kaki di hadapannya, و beliau menghadap kiblat.</p>
                                 <p><strong>39.</strong> Beliau terus-menerus wuquf hingga matahari terbenam, cahaya kuning sedikit memudar, dan piringan matahari tenggelam sepenuhnya.</p>
                             </div>
                         </div>
@@ -410,7 +426,7 @@
                                 <p><strong>48.</strong> Beliau menghadap kiblat,</p>
                                 <p><strong>49.</strong> Lalu memanjatkan doa kepada-Nya, bertakbir, bertahlil, dan mentauhidkan-Nya.</p>
                                 <p><strong>50.</strong> Beliau terus wuquf di sana hingga langit menjadi sangat terang.</p>
-                                <p><strong>51.</strong> Lalu beliau bertolak meninggalkan tempat itu sebelum matahari terbit.</p>
+                                <p><strong>51.</strong> Lalu beliau bertolak meninggalkan tempat itu قبل أن تطلع الشمس.</p>
                             </div>
                         </div>
                         <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border-r-4 border-amber-500">
@@ -487,7 +503,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-center mt-12">
+                    <div class="text-center mt-12 pb-10">
                         <button onclick="goToPage(0)" class="latin-text text-emerald-600 font-medium hover:text-emerald-800 underline decoration-2 underline-offset-4">
                             Kembali ke Awal
                         </button>
@@ -501,12 +517,58 @@
                 <button id="btnPrev" onclick="prevPage()" class="flex items-center gap-2 px-4 py-2 text-emerald-700 bg-emerald-50 rounded-lg font-medium hover:bg-emerald-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
                     ← <span class="hidden sm:inline">Sebelumnya</span>
                 </button>
-                <div class="text-slate-400 text-sm font-medium">
-                    Materi <span id="pageIndicator" class="text-emerald-600 font-bold">1/10</span>
+                <div class="text-slate-400 text-sm font-medium flex items-center gap-4">
+                    <span>Materi <span id="pageIndicator" class="text-emerald-600 font-bold">1/10</span></span>
                 </div>
                 <button id="btnNext" onclick="nextPage()" class="flex items-center gap-2 px-4 py-2 text-white bg-emerald-600 rounded-lg font-medium hover:bg-emerald-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors shadow-md">
                     <span class="hidden sm:inline">Selanjutnya</span> →
                 </button>
+            </div>
+
+            <!-- Floating Action Button for Gemini Chat -->
+            <button onclick="toggleChat()" class="fixed bottom-24 left-4 lg:left-80 z-40 bg-amber-500 text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 hover:bg-amber-400 transition-all flex items-center justify-center latin-text group">
+                <span class="text-2xl mr-1">✨</span>
+                <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 font-bold">
+                    <span class="pl-2">Tanya AI</span>
+                </span>
+            </button>
+
+            <!-- Gemini Chat Modal -->
+            <div id="chatModal" class="fixed inset-0 z-50 hidden items-end justify-center sm:items-center p-4 bg-slate-900/50 transition-opacity">
+                <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl flex flex-col h-[80vh] sm:h-[600px] transform scale-95 transition-transform duration-300 latin-text overflow-hidden" id="chatModalContent">
+                    <!-- Chat Header -->
+                    <div class="bg-emerald-900 text-white p-4 flex justify-between items-center shrink-0">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">✨</span>
+                            <div>
+                                <h3 class="font-bold">Asisten Fikih Haji AI</h3>
+                                <p class="text-xs text-emerald-200" id="chatContextDesc">Konteks: Mukadimah</p>
+                            </div>
+                        </div>
+                        <button onclick="toggleChat()" class="text-white hover:text-amber-400 text-2xl font-bold">&times;</button>
+                    </div>
+                    
+                    <!-- Chat Messages Area -->
+                    <div id="chatMessages" class="flex-1 p-4 overflow-y-auto bg-slate-50 flex flex-col gap-4">
+                        <!-- AI Greeting -->
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 text-xl">✨</div>
+                            <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-sm text-slate-700 border border-slate-100 leading-relaxed">
+                                Assalamu'alaikum! Saya adalah Asisten AI yang siap membantu menjelaskan Fikih Haji berdasarkan Hadits Jabir RA. Ada yang ingin ditanyakan tentang bagian ini?
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input Area -->
+                    <div class="p-4 bg-white border-t border-slate-100 shrink-0">
+                        <form id="chatForm" onsubmit="handleChatSubmit(event)" class="flex gap-2 relative">
+                            <input type="text" id="chatInput" placeholder="Tanyakan sesuatu..." class="flex-1 bg-slate-50 border border-slate-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors" autocomplete="off">
+                            <button type="submit" id="btnSendChat" class="bg-emerald-600 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -ml-1" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
 
         </main>
@@ -591,6 +653,8 @@
             currentPage = index;
             updateUI();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Update chat context if modal is open
+            document.getElementById('chatContextDesc').innerText = `Konteks: ${sections[currentPage].title}`;
         }
 
         function prevPage() { goToPage(currentPage - 1); }
@@ -621,6 +685,163 @@
             renderSidebar();
         }
 
+        /* =========================================
+         * Gemini AI Chat Logic 
+         * ========================================= */
+        
+        const apiKey = ""; // API Key is provided by the execution environment
+
+        function toggleChat() {
+            const modal = document.getElementById('chatModal');
+            const content = document.getElementById('chatModalContent');
+            
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.getElementById('chatContextDesc').innerText = `Konteks: ${sections[currentPage].title}`;
+                setTimeout(() => content.classList.remove('scale-95'), 10);
+            } else {
+                content.classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 300);
+            }
+        }
+
+        async function fetchWithRetry(url, options, retries = 5) {
+            const delays = [1000, 2000, 4000, 8000, 16000];
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return await response.json();
+                } catch (error) {
+                    if (i === retries - 1) throw error;
+                    await new Promise(res => setTimeout(res, delays[i]));
+                }
+            }
+        }
+
+        async function handleChatSubmit(e) {
+            e.preventDefault();
+            const inputField = document.getElementById('chatInput');
+            const question = inputField.value.trim();
+            const btnSend = document.getElementById('btnSendChat');
+
+            if (!question) return;
+
+            // Add user message to UI
+            appendMessage(question, 'user');
+            inputField.value = '';
+            inputField.disabled = true;
+            btnSend.disabled = true;
+
+            // Add typing indicator
+            const typingId = showTypingIndicator();
+
+            try {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                
+                // Context-aware prompt
+                const currentContext = sections[currentPage].title;
+                const pageContentText = document.getElementById(`page-${currentPage}`).innerText;
+                
+                const systemPrompt = `Kamu adalah asisten AI Fikih Haji yang ramah. Pengguna sedang mempelajari bagian: "${currentContext}". Jawab pertanyaan mereka dengan bahasa Indonesia yang jelas, ringkas, santun, dan sesuai pemahaman Ahlussunnah berlandaskan Hadits Jabir RA. Hindari memberikan informasi medis atau berbahaya.`;
+                
+                const payload = {
+                    contents: [{ parts: [{ text: question }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] }
+                };
+
+                const result = await fetchWithRetry(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const answerText = result.candidates?.[0]?.content?.parts?.[0]?.text || "Maaf, saya tidak dapat merespons saat ini. Silakan coba lagi.";
+                
+                removeElement(typingId);
+                appendMessage(answerText, 'ai');
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                removeElement(typingId);
+                appendMessage("Terjadi kesalahan pada jaringan. Mohon coba lagi beberapa saat.", 'error');
+            } finally {
+                inputField.disabled = false;
+                btnSend.disabled = false;
+                inputField.focus();
+            }
+        }
+
+        function appendMessage(text, sender) {
+            const container = document.getElementById('chatMessages');
+            const msgDiv = document.createElement('div');
+            
+            if (sender === 'user') {
+                msgDiv.className = 'flex items-start gap-3 justify-end';
+                msgDiv.innerHTML = `
+                    <div class="bg-emerald-600 text-white p-3 rounded-2xl rounded-tr-none shadow-sm text-sm max-w-[85%] leading-relaxed">
+                        ${escapeHTML(text)}
+                    </div>
+                `;
+            } else if (sender === 'ai' || sender === 'error') {
+                msgDiv.className = 'flex items-start gap-3';
+                const textClass = sender === 'error' ? 'text-red-500' : 'text-slate-700';
+                // Simple markdown-like formatting for bold text
+                let formattedText = escapeHTML(text).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                
+                msgDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 text-xl">✨</div>
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-sm ${textClass} border border-slate-100 leading-relaxed max-w-[85%] whitespace-pre-wrap">
+                        ${formattedText}
+                    </div>
+                `;
+            }
+            
+            container.appendChild(msgDiv);
+            scrollToBottom(container);
+        }
+
+        function showTypingIndicator() {
+            const container = document.getElementById('chatMessages');
+            const id = 'typing-' + Date.now();
+            const msgDiv = document.createElement('div');
+            msgDiv.id = id;
+            msgDiv.className = 'flex items-start gap-3 fade-in';
+            msgDiv.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 text-xl">✨</div>
+                <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-slate-100 typing-indicator flex items-center gap-1 h-10 px-4">
+                    <span></span><span></span><span></span>
+                </div>
+            `;
+            container.appendChild(msgDiv);
+            scrollToBottom(container);
+            return id;
+        }
+
+        function removeElement(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        function scrollToBottom(element) {
+            element.scrollTop = element.scrollHeight;
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+        }
     </script>
 </body>
 </html>
